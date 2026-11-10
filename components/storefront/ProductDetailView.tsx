@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 import {
   ShoppingBag,
   Zap,
@@ -52,6 +53,7 @@ export function ProductDetailView({ product }: ProductDetailProps) {
 
   const addItem = useCartStore((state) => state.addItem);
   const openCart = useCartStore((state) => state.openCart);
+  const router = useRouter();
 
   const regularPrice = Number(product.regularPrice);
   const salePrice = Number(product.salePrice);
@@ -100,7 +102,7 @@ export function ProductDetailView({ product }: ProductDetailProps) {
       imageUrl: primaryImage,
       quantity,
     });
-    openCart();
+    router.push(`/checkout?buyNow=${product.slug}&qty=${quantity}`);
   };
 
   const handleOrderWhatsApp = () => {

@@ -63,7 +63,7 @@ export function SignatureCollection({ products }: SignatureCollectionProps) {
           {/* Card Presentation */}
           <div className="w-full max-w-md bg-white rounded-xl shadow-xl border border-neutral-200/80 overflow-hidden text-center transition-all duration-300">
             {/* Image */}
-            <div className="relative aspect-square w-full bg-neutral-100 overflow-hidden group">
+            <Link href={`/products/${current.slug}`} className="block relative aspect-square w-full bg-neutral-100 overflow-hidden group">
               <Image
                 src={current.images[0]?.url || "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?q=80&w=800&auto=format&fit=crop"}
                 alt={current.name}
@@ -74,13 +74,15 @@ export function SignatureCollection({ products }: SignatureCollectionProps) {
               <div className="absolute top-3 right-3 bg-black text-white text-[10px] font-bold uppercase tracking-widest px-3 py-1 rounded-full">
                 {current.category?.name || "Featured"}
               </div>
-            </div>
+            </Link>
 
             {/* Info */}
             <div className="p-6 md:p-8 space-y-3">
-              <h3 className="text-lg md:text-xl font-bold text-neutral-900 tracking-tight">
-                {current.name}
-              </h3>
+              <Link href={`/products/${current.slug}`} className="block">
+                <h3 className="text-lg md:text-xl font-bold text-neutral-900 tracking-tight hover:text-neutral-600 transition">
+                  {current.name}
+                </h3>
+              </Link>
 
               <div className="flex items-center justify-center gap-3">
                 <span className="text-base md:text-lg font-bold text-brand-sale">
