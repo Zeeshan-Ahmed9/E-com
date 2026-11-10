@@ -1,8 +1,14 @@
 import { prisma, withDbRetry } from "@/lib/prisma";
+import {
+  serializeCategories,
+  serializeProducts,
+  serializeStoreSetting,
+} from "@/lib/serialize";
 import { AnnouncementMarquee } from "@/components/storefront/AnnouncementMarquee";
 import { Header } from "@/components/storefront/Header";
 import { NavigationBar } from "@/components/storefront/NavigationBar";
 import { HeroBanner } from "@/components/storefront/HeroBanner";
+import { FlashSaleCountdown } from "@/components/storefront/FlashSaleCountdown";
 import { AllCollectionsGrid } from "@/components/storefront/AllCollectionsGrid";
 import { AllProductsSection } from "@/components/storefront/AllProductsSection";
 import { SignatureCollection } from "@/components/storefront/SignatureCollection";
@@ -14,7 +20,7 @@ import { WhyChooseUs } from "@/components/storefront/WhyChooseUs";
 import { Footer } from "@/components/storefront/Footer";
 import { MobileStickyBar } from "@/components/storefront/MobileStickyBar";
 
-export const revalidate = 0; // Dynamic server rendering for live database content
+export const revalidate = 30; // High-performance 30s background revalidation cache
 
 export default async function HomePage() {
   let settings = null;
@@ -24,7 +30,7 @@ export default async function HomePage() {
 
   try {
     // Resilient serverless query execution with automatic retry
-    [settings, categories, products, featuredProducts] = await withDbRetry(async () => {
+    const [rawSettings, rawCategories, rawProducts, rawFeatured] = await withDbRetry(async () => {
       return await Promise.all([
         prisma.storeSetting.findUnique({
           where: { id: "default" },
@@ -77,9 +83,13 @@ export default async function HomePage() {
         }),
       ]);
     });
+
+    settings = serializeStoreSetting(rawSettings);
+    categories = serializeCategories(rawCategories);
+    products = serializeProducts(rawProducts);
+    featuredProducts = serializeProducts(rawFeatured);
   } catch (err: any) {
     console.error("[HomePage] Error fetching from database:", err?.message || err);
-    // In case of transient connection reset, ensure page renders with graceful defaults
   }
 
   return (
@@ -88,7 +98,7 @@ export default async function HomePage() {
       <AnnouncementMarquee
         text={
           settings?.announcementText ||
-          "RS 300 ADVANCE PAYMENT REQUIRED FOR ORDER CONFIRMATION • FREE DELIVERY ACROSS PAKISTAN (5-7 WORKING DAYS) • OUTLET COMING SOON"
+          "FREE DELIVERY ACROSS PAKISTAN (5-7 WORKING DAYS) • 100% CASH ON DELIVERY AVAILABLE • FLAT 15% OFF ORDERS"
         }
       />
 
@@ -101,6 +111,9 @@ export default async function HomePage() {
       {/* 4. Hero Promotional Banner */}
       <main className="flex-1">
         <HeroBanner />
+
+        {/* 4.5. Live Flash Sale Countdown Bar */}
+        <FlashSaleCountdown />
 
         {/* 5. All Collections (2x2 Grid with Superscript Counts) */}
         <AllCollectionsGrid categories={categories} />

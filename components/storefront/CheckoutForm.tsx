@@ -126,8 +126,6 @@ export function CheckoutForm({ buyNowProduct }: CheckoutFormProps = {}) {
 
   const shippingFee = 0; // Free delivery
   const totalAmount = currentSubtotal + shippingFee;
-  const advanceAmount = Math.min(300, totalAmount);
-  const remainingOnDelivery = Math.max(0, totalAmount - advanceAmount);
 
   if (mounted && effectiveItems.length === 0) {
     return (
@@ -432,19 +430,16 @@ export function CheckoutForm({ buyNowProduct }: CheckoutFormProps = {}) {
                 </span>
               </div>
 
-              {/* Advance Payment Policy Notice */}
-              <div className="mt-4 p-3.5 bg-amber-50/80 border border-amber-200 rounded-md text-[11px] text-amber-950 leading-relaxed">
+              {/* 100% Cash on Delivery & Free Shipping Notice */}
+              <div className="mt-4 p-3.5 bg-neutral-50 border border-neutral-200 rounded-md text-[11px] text-neutral-800 leading-relaxed">
                 <div className="flex items-start gap-2">
-                  <ShieldCheck className="w-4 h-4 text-amber-700 shrink-0 mt-0.5" />
+                  <ShieldCheck className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
                   <div>
-                    <strong className="font-bold text-amber-900 block mb-0.5">
-                      Rs. 300 Advance Payment Required for Order Confirmation
+                    <strong className="font-bold text-neutral-950 block mb-0.5">
+                      100% Cash on Delivery & Free Nationwide Shipping
                     </strong>
-                    To prevent false bookings and guarantee courier dispatch, an advance token of{" "}
-                    <strong>Rs. 300</strong> is required via JazzCash, EasyPaisa, or Online Bank
-                    Transfer. Our support representative will contact your WhatsApp immediately after
-                    order placement. The remaining{" "}
-                    <strong>{formatPKR(remainingOnDelivery)}</strong> is paid in cash at your doorstep!
+                    No advance payment required. You only pay the full amount of{" "}
+                    <strong>{formatPKR(totalAmount)}</strong> in cash to the courier rider upon delivery at your doorstep.
                   </div>
                 </div>
               </div>
@@ -555,17 +550,10 @@ export function CheckoutForm({ buyNowProduct }: CheckoutFormProps = {}) {
               </span>
             </div>
 
-            <div className="flex justify-between text-neutral-600">
-              <span>Advance Confirmation Token</span>
-              <span className="font-semibold text-amber-700 font-sans">
-                Rs. 300
-              </span>
-            </div>
-
-            <div className="flex justify-between text-neutral-600">
-              <span>Payable on Doorstep</span>
+            <div className="flex justify-between text-neutral-600 items-center">
+              <span>Payment Method</span>
               <span className="font-semibold text-neutral-900 font-sans">
-                {formatPKR(remainingOnDelivery)}
+                Cash on Delivery (100%)
               </span>
             </div>
 

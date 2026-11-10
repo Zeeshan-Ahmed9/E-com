@@ -133,7 +133,7 @@ export function ContactForm() {
             className="w-full bg-neutral-50 border border-neutral-200 rounded px-3.5 py-2.5 text-xs text-neutral-900 focus:outline-none focus:border-black focus:bg-white transition cursor-pointer"
           >
             <option value="Order Status">Order Status & Delivery</option>
-            <option value="Advance Payment">Advance Rs. 300 Confirmation</option>
+            <option value="Payment Inquiry">Payment & Cash on Delivery</option>
             <option value="Product Question">Product Specification / In stock</option>
             <option value="Return / Replacement">Checking Warranty / Return</option>
             <option value="Other">Other Inquiry</option>

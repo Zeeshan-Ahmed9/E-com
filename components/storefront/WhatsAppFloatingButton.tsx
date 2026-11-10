@@ -1,8 +1,16 @@
 "use client";
 
+import { usePathname } from "next/navigation";
 import { MessageCircle } from "lucide-react";
 
 export function WhatsAppFloatingButton() {
+  const pathname = usePathname();
+
+  // Hide floating WhatsApp button on admin dashboard
+  if (pathname?.startsWith("/admin")) {
+    return null;
+  }
+
   const whatsappUrl =
     "https://wa.me/923245003393?text=Hello%20ZappMart!%20I%20want%20to%20inquire%20about%20a%20product%20from%20your%20store.%20Please%20guide%20me.";
 

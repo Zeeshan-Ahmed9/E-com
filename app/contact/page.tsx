@@ -1,5 +1,9 @@
 import Link from "next/link";
 import { prisma, withDbRetry } from "@/lib/prisma";
+import {
+  serializeCategories,
+  serializeStoreSetting,
+} from "@/lib/serialize";
 import { AnnouncementMarquee } from "@/components/storefront/AnnouncementMarquee";
 import { Header } from "@/components/storefront/Header";
 import { NavigationBar } from "@/components/storefront/NavigationBar";
@@ -22,14 +26,14 @@ export const metadata = {
     "Get in touch with ZappMart Pakistan. Reach our dedicated team via WhatsApp, phone, or email for order status, inquiries, and customer support.",
 };
 
-export const revalidate = 0;
+export const revalidate = 30;
 
 export default async function ContactPage() {
   let settings = null;
   let categories: any[] = [];
 
   try {
-    [settings, categories] = await withDbRetry(async () => {
+    const [rawSettings, rawCategories] = await withDbRetry(async () => {
       return await Promise.all([
         prisma.storeSetting.findUnique({ where: { id: "default" } }),
         prisma.category.findMany({
@@ -37,6 +41,8 @@ export default async function ContactPage() {
         }),
       ]);
     });
+    settings = serializeStoreSetting(rawSettings);
+    categories = serializeCategories(rawCategories);
   } catch (err: any) {
     console.error("[ContactPage] Database error:", err?.message || err);
   }
@@ -69,7 +75,7 @@ export default async function ContactPage() {
             Contact Us
           </h1>
           <p className="text-xs sm:text-sm text-neutral-500 mt-2 max-w-xl font-normal leading-relaxed">
-            Have questions about an item, delivery status, or advance payment confirmation? Our customer care team is here to assist you nationwide.
+            Have questions about an item, delivery status, or an existing order? Our customer care team is here to assist you nationwide.
           </p>
         </div>
 
@@ -163,14 +169,14 @@ export default async function ContactPage() {
               </div>
             </div>
 
-            {/* Advance Deposit Notice Box */}
+            {/* 100% Cash on Delivery & Free Shipping Box */}
             <div className="flex items-start gap-3 p-4 rounded-xl bg-neutral-50 border border-neutral-200 text-neutral-700">
               <ShieldAlert className="w-5 h-5 text-neutral-900 shrink-0 mt-0.5" />
               <div className="text-xs leading-relaxed">
                 <strong className="text-neutral-900 font-bold block mb-0.5">
-                  Advance Payment Requirement
+                  100% Cash on Delivery & Free Shipping
                 </strong>
-                To prevent false orders and ensure swift courier dispatch, an advance payment of <strong>Rs. 300</strong> is required for order confirmation. The remaining total is paid upon doorstep delivery.
+                We offer free shipping on all products across Pakistan. No advance payment is required—simply pay cash to the courier when your order is delivered to your doorstep.
               </div>
             </div>
           </div>

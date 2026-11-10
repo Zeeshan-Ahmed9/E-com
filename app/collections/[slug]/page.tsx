@@ -1,6 +1,12 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { prisma, withDbRetry } from "@/lib/prisma";
+import {
+  serializeCategory,
+  serializeCategories,
+  serializeProducts,
+  serializeStoreSetting,
+} from "@/lib/serialize";
 import { AnnouncementMarquee } from "@/components/storefront/AnnouncementMarquee";
 import { Header } from "@/components/storefront/Header";
 import { NavigationBar } from "@/components/storefront/NavigationBar";
@@ -13,7 +19,7 @@ interface CategoryPageProps {
   params: Promise<{ slug: string }>;
 }
 
-export const revalidate = 0;
+export const revalidate = 30;
 
 export async function generateMetadata({ params }: CategoryPageProps) {
   const { slug } = await params;
@@ -71,10 +77,10 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
       return { settings: s, categories: cats, category: cat, products: prods };
     });
 
-    settings = result.settings;
-    categories = result.categories;
-    category = result.category;
-    products = result.products;
+    settings = serializeStoreSetting(result.settings);
+    categories = serializeCategories(result.categories);
+    category = serializeCategory(result.category);
+    products = serializeProducts(result.products);
   } catch (err: any) {
     console.error("[CategoryPage] Database error:", err?.message || err);
   }

@@ -6,7 +6,7 @@ interface AnnouncementMarqueeProps {
 }
 
 export function AnnouncementMarquee({
-  text = "RS 300 ADVANCE PAYMENT REQUIRED FOR ORDER CONFIRMATION • FREE DELIVERY ACROSS PAKISTAN (5-7 WORKING DAYS) • OUTLET COMING SOON",
+  text = "FREE SHIPPING NATIONWIDE (5-7 WORKING DAYS) • 100% CASH ON DELIVERY AVAILABLE • FLAT 15% OFF",
 }: AnnouncementMarqueeProps) {
   // Repeat text to ensure seamless continuous scroll
   const items = Array(6).fill(text);

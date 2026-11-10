@@ -4,7 +4,8 @@ import { prisma, withDbRetry } from "@/lib/prisma";
 
 export interface CheckoutItemPayload {
   productId?: string;
-  name: string;
+  name?: string;
+  productName?: string;
   price: number;
   quantity: number;
   imageUrl?: string;
@@ -107,7 +108,7 @@ export async function placeOrder(input: PlaceOrderInput): Promise<PlaceOrderResu
           items: {
             create: items.map((item) => ({
               productId: item.productId || null,
-              productName: item.name,
+              productName: item.name || item.productName || "Product",
               price: item.price,
               quantity: Math.max(1, item.quantity),
               imageUrl: item.imageUrl || null,

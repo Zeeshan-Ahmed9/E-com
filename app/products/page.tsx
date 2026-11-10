@@ -1,5 +1,10 @@
 import Link from "next/link";
 import { prisma, withDbRetry } from "@/lib/prisma";
+import {
+  serializeCategories,
+  serializeProducts,
+  serializeStoreSetting,
+} from "@/lib/serialize";
 import { AnnouncementMarquee } from "@/components/storefront/AnnouncementMarquee";
 import { Header } from "@/components/storefront/Header";
 import { NavigationBar } from "@/components/storefront/NavigationBar";
@@ -13,7 +18,7 @@ export const metadata = {
   description: "Browse all verified electronics, kitchen tools, home living, toys, and daily accessories with nationwide Cash on Delivery.",
 };
 
-export const revalidate = 0;
+export const revalidate = 30;
 
 export default async function AllProductsPage() {
   let settings = null;
@@ -21,7 +26,7 @@ export default async function AllProductsPage() {
   let products: any[] = [];
 
   try {
-    [settings, categories, products] = await withDbRetry(async () => {
+    const [rawSettings, rawCategories, rawProducts] = await withDbRetry(async () => {
       return await Promise.all([
         prisma.storeSetting.findUnique({
           where: { id: "default" },
@@ -55,6 +60,10 @@ export default async function AllProductsPage() {
         }),
       ]);
     });
+
+    settings = serializeStoreSetting(rawSettings);
+    categories = serializeCategories(rawCategories);
+    products = serializeProducts(rawProducts);
   } catch (err: any) {
     console.error("[AllProductsPage] Database query error:", err?.message || err);
   }
@@ -116,7 +125,7 @@ export default async function AllProductsPage() {
               Cash on Delivery (COD)
             </h4>
             <p className="text-[11px] text-neutral-500 mt-0.5">
-              Rs. 300 advance confirmation • Rest at doorstep
+              100% Cash on Delivery • Free Nationwide Shipping
             </p>
           </div>
 

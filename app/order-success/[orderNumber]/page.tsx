@@ -2,6 +2,11 @@ import Link from "next/link";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 import { prisma, withDbRetry } from "@/lib/prisma";
+import {
+  serializeOrder,
+  serializeCategories,
+  serializeStoreSetting,
+} from "@/lib/serialize";
 import { AnnouncementMarquee } from "@/components/storefront/AnnouncementMarquee";
 import { Header } from "@/components/storefront/Header";
 import { NavigationBar } from "@/components/storefront/NavigationBar";
@@ -54,9 +59,9 @@ export default async function OrderSuccessPage({ params }: OrderSuccessProps) {
       return { order: ord, settings: s, categories: cats };
     });
 
-    order = result.order;
-    settings = result.settings;
-    categories = result.categories;
+    order = serializeOrder(result.order);
+    settings = serializeStoreSetting(result.settings);
+    categories = serializeCategories(result.categories);
   } catch (err: any) {
     console.error("[OrderSuccessPage] DB query error:", err?.message || err);
   }
@@ -93,11 +98,9 @@ export default async function OrderSuccessPage({ params }: OrderSuccessProps) {
 
   const totalAmount = Number(order.totalAmount);
   const subtotal = Number(order.subtotal);
-  const advanceAmount = Math.min(300, totalAmount);
-  const remainingOnDelivery = Math.max(0, totalAmount - advanceAmount);
 
   // WhatsApp quick confirmation link
-  const waConfirmationText = `Hello ZappMart! I have placed an order.\n\n*Order Number:* #${order.orderNumber}\n*Customer:* ${order.customerName}\n*City:* ${order.city}\n*Total Amount:* ${formatPKR(totalAmount)}\n*Advance Token:* Rs. 300\n*Doorstep Cash:* ${formatPKR(remainingOnDelivery)}\n\nPlease provide payment details for Rs. 300 to confirm courier dispatch.`;
+  const waConfirmationText = `Hello ZappMart! I have placed an order.\n\n*Order Number:* #${order.orderNumber}\n*Customer:* ${order.customerName}\n*City:* ${order.city}\n*Total Amount:* ${formatPKR(totalAmount)}\n*Payment Method:* 100% Cash on Delivery (Free Shipping)\n\nPlease confirm dispatch of my parcel.`;
   const waUrl = `https://wa.me/923245003393?text=${encodeURIComponent(waConfirmationText)}`;
 
   return (
@@ -132,20 +135,20 @@ export default async function OrderSuccessPage({ params }: OrderSuccessProps) {
             </span>
           </p>
 
-          {/* Advance Payment Action Banner */}
-          <div className="mt-8 p-5 bg-amber-50/90 border border-amber-200/80 rounded-xl text-left">
+          {/* 100% Cash on Delivery & Free Shipping Banner */}
+          <div className="mt-8 p-5 bg-emerald-50/90 border border-emerald-200/80 rounded-xl text-left">
             <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
               <div className="space-y-1">
                 <div className="flex items-center gap-2">
-                  <ShieldCheck className="w-5 h-5 text-amber-700 shrink-0" />
-                  <h3 className="text-xs sm:text-sm font-bold text-amber-950 uppercase tracking-tight">
-                    Next Step: Rs. 300 Advance Token Confirmation
+                  <ShieldCheck className="w-5 h-5 text-emerald-700 shrink-0" />
+                  <h3 className="text-xs sm:text-sm font-bold text-emerald-950 uppercase tracking-tight">
+                    100% Cash on Delivery • Free Shipping Nationwide
                   </h3>
                 </div>
-                <p className="text-[11px] sm:text-xs text-amber-900 leading-relaxed max-w-xl">
-                  To confirm courier booking and dispatch your parcel, an advance token of{" "}
-                  <strong>Rs. 300</strong> is required via JazzCash / EasyPaisa / Bank. Our team will
-                  message you on <strong>{order.customerPhone}</strong>, or you can confirm instantly below:
+                <p className="text-[11px] sm:text-xs text-emerald-900 leading-relaxed max-w-xl">
+                  No advance payment is required. Your parcel is being packed and will be delivered
+                  within 5–7 working days. You only pay <strong>{formatPKR(totalAmount)}</strong> in cash
+                  to the courier at your doorstep.
                 </p>
               </div>
 
@@ -156,7 +159,7 @@ export default async function OrderSuccessPage({ params }: OrderSuccessProps) {
                 className="shrink-0 w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-brand-whatsapp hover:opacity-95 text-white px-5 py-3 rounded-lg text-xs font-bold uppercase tracking-wider transition shadow-sm"
               >
                 <MessageCircle className="w-4 h-4 fill-current" />
-                <span>Confirm on WhatsApp</span>
+                <span>Track on WhatsApp</span>
               </a>
             </div>
           </div>
@@ -274,16 +277,16 @@ export default async function OrderSuccessPage({ params }: OrderSuccessProps) {
                 </div>
 
                 <div className="flex justify-between text-neutral-600">
-                  <span>Advance Token Confirmation</span>
-                  <span className="font-semibold text-amber-700 font-sans">
-                    Rs. 300
+                  <span>Payment Method</span>
+                  <span className="font-semibold text-neutral-900 font-sans">
+                    Cash on Delivery (100%)
                   </span>
                 </div>
 
                 <div className="flex justify-between text-neutral-600">
                   <span>Cash Payable on Delivery</span>
                   <span className="font-semibold text-neutral-900 font-sans">
-                    {formatPKR(remainingOnDelivery)}
+                    {formatPKR(totalAmount)}
                   </span>
                 </div>
 
@@ -320,8 +323,8 @@ export default async function OrderSuccessPage({ params }: OrderSuccessProps) {
                     2
                   </div>
                   <div>
-                    <h5 className="text-xs font-bold text-neutral-900">Rs. 300 Token Verification</h5>
-                    <p className="text-[11px] text-neutral-500">Via WhatsApp within 15-30 mins</p>
+                    <h5 className="text-xs font-bold text-neutral-900">Order Verification & Packing</h5>
+                    <p className="text-[11px] text-neutral-500">Prepared for courier pickup within 24 hours</p>
                   </div>
                 </div>
 

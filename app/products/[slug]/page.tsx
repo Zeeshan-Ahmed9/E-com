@@ -1,6 +1,12 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { prisma, withDbRetry } from "@/lib/prisma";
+import {
+  serializeProduct,
+  serializeProducts,
+  serializeCategories,
+  serializeStoreSetting,
+} from "@/lib/serialize";
 import { AnnouncementMarquee } from "@/components/storefront/AnnouncementMarquee";
 import { Header } from "@/components/storefront/Header";
 import { NavigationBar } from "@/components/storefront/NavigationBar";
@@ -14,7 +20,7 @@ interface ProductPageProps {
   params: Promise<{ slug: string }>;
 }
 
-export const revalidate = 0;
+export const revalidate = 30;
 
 export async function generateMetadata({ params }: ProductPageProps) {
   const { slug } = await params;
@@ -72,10 +78,10 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
       return { settings: s, categories: cats, product: prod, relatedProducts: related };
     });
 
-    settings = result.settings;
-    categories = result.categories;
-    product = result.product;
-    relatedProducts = result.relatedProducts;
+    settings = serializeStoreSetting(result.settings);
+    categories = serializeCategories(result.categories);
+    product = serializeProduct(result.product);
+    relatedProducts = serializeProducts(result.relatedProducts);
   } catch (err: any) {
     console.error("[ProductDetailPage] Database error:", err?.message || err);
   }

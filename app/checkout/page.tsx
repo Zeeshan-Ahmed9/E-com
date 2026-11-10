@@ -1,5 +1,9 @@
 import Link from "next/link";
 import { prisma, withDbRetry } from "@/lib/prisma";
+import {
+  serializeCategories,
+  serializeStoreSetting,
+} from "@/lib/serialize";
 import { AnnouncementMarquee } from "@/components/storefront/AnnouncementMarquee";
 import { Header } from "@/components/storefront/Header";
 import { NavigationBar } from "@/components/storefront/NavigationBar";
@@ -42,8 +46,8 @@ export default async function CheckoutPage({ searchParams }: CheckoutPageProps) 
       ]);
       return { settings: s, categories: cats, buyNowProduct: prod };
     });
-    settings = result.settings;
-    categories = result.categories;
+    settings = serializeStoreSetting(result.settings);
+    categories = serializeCategories(result.categories);
 
     if (result.buyNowProduct) {
       const p = result.buyNowProduct;

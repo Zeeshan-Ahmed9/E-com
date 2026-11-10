@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useMemo } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { ProductCard } from "./ProductCard";
 import { SlidersHorizontal, ArrowUpDown } from "lucide-react";
 
@@ -83,16 +84,17 @@ export function ProductsCatalog({
       <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 border-b border-neutral-100 pb-5">
         {/* Category Pills (Horizontal Scrollable on Mobile) */}
         <div className="flex items-center gap-2 overflow-x-auto no-scrollbar w-full md:w-auto pb-1 md:pb-0">
-          <button
+          <motion.button
+            whileTap={{ scale: 0.95 }}
             onClick={() => setSelectedCat("all")}
-            className={`px-4 py-2 rounded-full text-xs font-semibold uppercase tracking-wider whitespace-nowrap transition-all ${
+            className={`px-4 py-2 rounded-full text-xs font-semibold uppercase tracking-wider whitespace-nowrap transition-all cursor-pointer ${
               selectedCat === "all"
                 ? "bg-black text-white shadow-xs"
                 : "bg-neutral-100 text-neutral-700 hover:bg-neutral-200"
             }`}
           >
             All Products ({initialProducts.length})
-          </button>
+          </motion.button>
 
           {categories.map((cat) => {
             const count =
@@ -101,17 +103,18 @@ export function ProductsCatalog({
             const isSelected = selectedCat === cat.slug;
 
             return (
-              <button
+              <motion.button
                 key={cat.id}
+                whileTap={{ scale: 0.95 }}
                 onClick={() => setSelectedCat(cat.slug)}
-                className={`px-4 py-2 rounded-full text-xs font-semibold uppercase tracking-wider whitespace-nowrap transition-all ${
+                className={`px-4 py-2 rounded-full text-xs font-semibold uppercase tracking-wider whitespace-nowrap transition-all cursor-pointer ${
                   isSelected
                     ? "bg-black text-white shadow-xs"
                     : "bg-neutral-100 text-neutral-700 hover:bg-neutral-200"
                 }`}
               >
                 {cat.name} ({count})
-              </button>
+              </motion.button>
             );
           })}
         </div>
@@ -127,7 +130,7 @@ export function ProductsCatalog({
             <select
               value={sortBy}
               onChange={(e) => setSortBy(e.target.value)}
-              className="bg-white border border-neutral-200 rounded text-xs font-semibold text-neutral-800 py-1.5 px-2.5 focus:outline-none focus:border-black cursor-pointer"
+              className="bg-white border border-neutral-200 rounded-lg text-xs font-semibold text-neutral-800 py-1.5 px-3 focus:outline-none focus:border-black cursor-pointer shadow-2xs"
             >
               <option value="featured">Sort by: Featured</option>
               <option value="price-asc">Price: Low to High</option>
@@ -150,19 +153,21 @@ export function ProductsCatalog({
           </p>
           <button
             onClick={() => setSelectedCat("all")}
-            className="inline-block bg-black text-white text-xs font-bold uppercase tracking-wider px-6 py-2.5 rounded shadow-sm hover:bg-neutral-800 transition"
+            className="inline-block bg-black text-white text-xs font-bold uppercase tracking-wider px-6 py-2.5 rounded shadow-sm hover:bg-neutral-800 transition cursor-pointer"
           >
             Reset Filters
           </button>
         </div>
       ) : (
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6 md:gap-8">
+        <motion.div
+          layout
+          className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6 md:gap-8"
+        >
           {filteredProducts.map((product) => (
             <ProductCard key={product.id} product={product} />
           ))}
-        </div>
+        </motion.div>
       )}
     </div>
   );
 }
-
