@@ -67,11 +67,10 @@ export function MobileDrawer({ isOpen, onClose, categories = [] }: MobileDrawerP
                     <Link
                       href={item.href}
                       onClick={onClose}
-                      className={`flex items-center justify-between py-3 text-sm font-semibold border-b border-[#E7EAF3]/60 transition ${
-                        isActive
+                      className={`flex items-center justify-between py-3 text-sm font-semibold border-b border-[#E7EAF3]/60 transition ${isActive
                           ? "text-[#FF4D2E] bg-[#FFF6F3] px-3 rounded-xl"
                           : "text-[#0B1220] hover:text-[#FF4D2E]"
-                      }`}
+                        }`}
                     >
                       <span className="flex items-center gap-3">
                         <Icon className="w-4 h-4 text-neutral-500" />
@@ -118,7 +117,7 @@ export function MobileDrawer({ isOpen, onClose, categories = [] }: MobileDrawerP
             </span>
             <div className="space-y-2">
               <a
-                href="https://wa.me/923245003393?text=Hello%20ZappMart!%20I%20have%20an%20inquiry%20regarding%20products."
+                href="https://wa.me/923302867560?text=Hello%20ZappMart!%20I%20have%20an%20inquiry%20regarding%20products."
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center justify-center gap-2 w-full bg-brand-whatsapp text-white py-2.5 rounded text-xs font-semibold uppercase tracking-wider shadow-xs hover:opacity-95 transition"

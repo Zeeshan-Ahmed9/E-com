@@ -132,7 +132,7 @@ export function Footer({ categories = [] }: FooterProps) {
               </li>
               <li>
                 <a
-                  href="https://wa.me/923245003393"
+                  href="https://wa.me/923302867560"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-[#25D366] hover:underline font-semibold"

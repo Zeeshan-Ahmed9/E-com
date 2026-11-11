@@ -21,7 +21,7 @@ async function main() {
       announcementText:
         "RS 300 ADVANCE PAYMENT REQUIRED FOR ORDER CONFIRMATION • FREE DELIVERY ACROSS PAKISTAN (5-7 WORKING DAYS) • OUTLET COMING SOON",
       marqueeSpeed: 22,
-      whatsappNumber: "923245003393",
+      whatsappNumber: "923302867560",
       outletBannerText:
         "🎉 ZAPPMART OUTLET COMING SOON — Get Ready for Amazing Deals & Exclusive Collections ✨",
     },

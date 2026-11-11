@@ -49,7 +49,7 @@ export function CartDrawer() {
 
     const message = `Hello ZappMart! I would like to place an order via WhatsApp:\n\n${itemList}\n\n*Total Amount:* ${formatPKR(currentSubtotal)}\n*Shipping:* FREE NATIONWIDE (5-7 Working Days)\n*Payment Method:* 100% Cash on Delivery\n\nPlease confirm my order.`;
 
-    window.open(`https://wa.me/923245003393?text=${encodeURIComponent(message)}`, "_blank");
+    window.open(`https://wa.me/923302867560?text=${encodeURIComponent(message)}`, "_blank");
   };
 
   return (

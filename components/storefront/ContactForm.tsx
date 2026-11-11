@@ -28,7 +28,7 @@ export function ContactForm() {
 
   const handleWhatsAppDirect = () => {
     const text = `Hello ZappMart Support!\n\n*Name:* ${formData.name || "Customer"}\n*Phone:* ${formData.phone || "Not provided"}\n*Order #:* ${formData.orderNumber || "None"}\n*Subject:* ${formData.subject}\n*Message:* ${formData.message || "I need assistance with an order."}`;
-    window.open(`https://wa.me/923245003393?text=${encodeURIComponent(text)}`, "_blank");
+    window.open(`https://wa.me/923302867560?text=${encodeURIComponent(text)}`, "_blank");
   };
 
   if (submitted) {

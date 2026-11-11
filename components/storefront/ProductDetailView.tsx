@@ -135,7 +135,7 @@ export function ProductDetailView({ product }: ProductDetailProps) {
 
   const handleOrderWhatsApp = () => {
     const message = `Hello ZappMart! I would like to order *${product.name}* (${quantity} item${quantity > 1 ? "s" : ""}) for *${formatPKR(salePrice * quantity)}* via 100% Cash on Delivery.\n\nProduct Link: ${window.location.href}\n\nPlease confirm availability and dispatch!`;
-    window.open(`https://wa.me/923245003393?text=${encodeURIComponent(message)}`, "_blank");
+    window.open(`https://wa.me/923302867560?text=${encodeURIComponent(message)}`, "_blank");
   };
 
   // Dates for delivery timeline
@@ -196,11 +196,10 @@ export function ProductDetailView({ product }: ProductDetailProps) {
               aria-label="Wishlist"
             >
               <Heart
-                className={`w-5 h-5 transition-colors ${
-                  isWishlisted
+                className={`w-5 h-5 transition-colors ${isWishlisted
                     ? "text-red-500 fill-red-500"
                     : "text-neutral-500 hover:text-black"
-                }`}
+                  }`}
               />
             </motion.button>
 
@@ -222,11 +221,10 @@ export function ProductDetailView({ product }: ProductDetailProps) {
                   key={img.id || idx}
                   whileTap={{ scale: 0.94 }}
                   onClick={() => setSelectedImageIndex(idx)}
-                  className={`relative w-20 h-20 rounded-xl overflow-hidden shrink-0 border-2 transition-all cursor-pointer ${
-                    selectedImageIndex === idx
+                  className={`relative w-20 h-20 rounded-xl overflow-hidden shrink-0 border-2 transition-all cursor-pointer ${selectedImageIndex === idx
                       ? "border-[#FF4D2E] ring-2 ring-[#FF4D2E]/30 shadow-md scale-95"
                       : "border-neutral-200 opacity-70 hover:opacity-100 hover:border-neutral-400"
-                  }`}
+                    }`}
                   aria-label={`View image ${idx + 1}`}
                 >
                   <Image
@@ -422,9 +420,8 @@ export function ProductDetailView({ product }: ProductDetailProps) {
               >
                 <span>Product Overview & Features</span>
                 <ChevronDown
-                  className={`w-4 h-4 text-neutral-500 transition-transform ${
-                    openAccordion === "description" ? "rotate-180" : ""
-                  }`}
+                  className={`w-4 h-4 text-neutral-500 transition-transform ${openAccordion === "description" ? "rotate-180" : ""
+                    }`}
                 />
               </button>
               {openAccordion === "description" && (
@@ -447,9 +444,8 @@ export function ProductDetailView({ product }: ProductDetailProps) {
               >
                 <span>Free Shipping & 100% Cash on Delivery</span>
                 <ChevronDown
-                  className={`w-4 h-4 text-neutral-500 transition-transform ${
-                    openAccordion === "shipping" ? "rotate-180" : ""
-                  }`}
+                  className={`w-4 h-4 text-neutral-500 transition-transform ${openAccordion === "shipping" ? "rotate-180" : ""
+                    }`}
                 />
               </button>
               {openAccordion === "shipping" && (
@@ -472,9 +468,8 @@ export function ProductDetailView({ product }: ProductDetailProps) {
               >
                 <span>7-Day Easy Replacement Warranty</span>
                 <ChevronDown
-                  className={`w-4 h-4 text-neutral-500 transition-transform ${
-                    openAccordion === "warranty" ? "rotate-180" : ""
-                  }`}
+                  className={`w-4 h-4 text-neutral-500 transition-transform ${openAccordion === "warranty" ? "rotate-180" : ""
+                    }`}
                 />
               </button>
               {openAccordion === "warranty" && (

@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   description:
     "Trending lifestyle products, gadgets, home & kitchen essentials with 100% Cash on Delivery across Pakistan.",
   icons: {
-    icon: "/favicon.ico",
+    icon: "/cartlogo.png",
   },
 };
 

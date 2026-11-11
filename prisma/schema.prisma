@@ -152,7 +152,7 @@ model StoreSetting {
   storeName        String   @default("2S STORE")
   announcementText String   @default("FREE SHIPPING NATIONWIDE (5-7 WORKING DAYS) • CASH ON DELIVERY AVAILABLE")
   marqueeSpeed     Int      @default(20)
-  whatsappNumber   String   @default("923245003393")
+  whatsappNumber   String   @default("923302867560")
   outletBannerText String   @default("🎉 Special Deals & New Arrivals Available Now! ✨")
   updatedAt        DateTime @updatedAt
 

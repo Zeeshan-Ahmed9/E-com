@@ -100,19 +100,19 @@ export function serializeProduct(product: any): SerializedProduct | null {
     categoryId: String(product.categoryId || ""),
     category: product.category
       ? {
-          id: product.category.id ? String(product.category.id) : undefined,
-          name: String(product.category.name || ""),
-          slug: String(product.category.slug || ""),
-        }
+        id: product.category.id ? String(product.category.id) : undefined,
+        name: String(product.category.name || ""),
+        slug: String(product.category.slug || ""),
+      }
       : null,
     images: Array.isArray(product.images)
       ? product.images.map((img: any) => ({
-          id: String(img.id || ""),
-          url: String(img.url || ""),
-          publicId: String(img.publicId || ""),
-          alt: img.alt ? String(img.alt) : null,
-          sortOrder: Number(img.sortOrder || 0),
-        }))
+        id: String(img.id || ""),
+        url: String(img.url || ""),
+        publicId: String(img.publicId || ""),
+        alt: img.alt ? String(img.alt) : null,
+        sortOrder: Number(img.sortOrder || 0),
+      }))
       : [],
     createdAt: product.createdAt
       ? new Date(product.createdAt).toISOString()
@@ -147,8 +147,8 @@ export function serializeCategory(category: any): SerializedCategory | null {
       : new Date().toISOString(),
     _count: category._count
       ? {
-          products: Number(category._count.products || 0),
-        }
+        products: Number(category._count.products || 0),
+      }
       : undefined,
   };
 }
@@ -178,15 +178,15 @@ export function serializeOrder(order: any): SerializedOrder | null {
     orderStatus: String(order.orderStatus || "PENDING"),
     items: Array.isArray(order.items)
       ? order.items.map((item: any) => ({
-          id: String(item.id || ""),
-          orderId: String(item.orderId || ""),
-          productId: item.productId ? String(item.productId) : null,
-          productName: String(item.productName || ""),
-          price: item.price ? Number(item.price) : 0,
-          quantity: Number(item.quantity || 1),
-          imageUrl: item.imageUrl ? String(item.imageUrl) : null,
-          variantInfo: item.variantInfo ? String(item.variantInfo) : null,
-        }))
+        id: String(item.id || ""),
+        orderId: String(item.orderId || ""),
+        productId: item.productId ? String(item.productId) : null,
+        productName: String(item.productName || ""),
+        price: item.price ? Number(item.price) : 0,
+        quantity: Number(item.quantity || 1),
+        imageUrl: item.imageUrl ? String(item.imageUrl) : null,
+        variantInfo: item.variantInfo ? String(item.variantInfo) : null,
+      }))
       : [],
     createdAt: order.createdAt
       ? new Date(order.createdAt).toISOString()
@@ -209,10 +209,10 @@ export function serializeStoreSetting(setting: any) {
     storeName: String(setting.storeName || "ZappMart"),
     announcementText: String(
       setting.announcementText ||
-        "FREE DELIVERY ACROSS PAKISTAN (5-7 WORKING DAYS) • 100% CASH ON DELIVERY AVAILABLE • FLAT 15% OFF"
+      "FREE DELIVERY ACROSS PAKISTAN (5-7 WORKING DAYS) • 100% CASH ON DELIVERY AVAILABLE • FLAT 15% OFF"
     ),
     marqueeSpeed: Number(setting.marqueeSpeed || 20),
-    whatsappNumber: String(setting.whatsappNumber || "923245003393"),
+    whatsappNumber: String(setting.whatsappNumber || "923302867560"),
     outletBannerText: String(setting.outletBannerText || "Special Deals Available Now!"),
     updatedAt: setting.updatedAt
       ? new Date(setting.updatedAt).toISOString()

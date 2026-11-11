@@ -12,7 +12,7 @@ export function WhatsAppFloatingButton() {
   }
 
   const whatsappUrl =
-    "https://wa.me/923245003393?text=Hello%20ZappMart!%20I%20want%20to%20inquire%20about%20a%20product%20from%20your%20store.%20Please%20guide%20me.";
+    "https://wa.me/923302867560?text=Hello%20ZappMart!%20I%20want%20to%20inquire%20about%20a%20product%20from%20your%20store.%20Please%20guide%20me.";
 
   return (
     <div className="fixed bottom-20 md:bottom-8 right-4 md:right-7 z-40 select-none">

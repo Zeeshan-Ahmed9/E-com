@@ -84,7 +84,7 @@ export function CheckoutForm({ buyNowProduct }: CheckoutFormProps = {}) {
     items.length > 0
       ? items
       : buyNowProduct
-      ? [
+        ? [
           {
             id: buyNowProduct.id,
             productId: buyNowProduct.id,
@@ -96,7 +96,7 @@ export function CheckoutForm({ buyNowProduct }: CheckoutFormProps = {}) {
             quantity: buyNowProduct.quantity || 1,
           },
         ]
-      : [];
+        : [];
 
   useEffect(() => {
     setMounted(true);
@@ -218,15 +218,13 @@ export function CheckoutForm({ buyNowProduct }: CheckoutFormProps = {}) {
       )
       .join("\n");
 
-    const text = `Hello ZappMart! I would like to place a Direct Order:\n\n*Name:* ${
-      formData.customerName || "Customer"
-    }\n*Phone:* ${formData.customerPhone || "N/A"}\n*City:* ${
-      formData.city || "Karachi"
-    }\n*Address:* ${formData.shippingAddress || "N/A"}\n\n*Order Items:*\n${itemList}\n\n*Total:* ${formatPKR(
-      totalAmount
-    )}\n*Shipping:* FREE (5-7 Days)\n*Payment:* Cash on Delivery\n\nPlease confirm availability and booking.`;
+    const text = `Hello ZappMart! I would like to place a Direct Order:\n\n*Name:* ${formData.customerName || "Customer"
+      }\n*Phone:* ${formData.customerPhone || "N/A"}\n*City:* ${formData.city || "Karachi"
+      }\n*Address:* ${formData.shippingAddress || "N/A"}\n\n*Order Items:*\n${itemList}\n\n*Total:* ${formatPKR(
+        totalAmount
+      )}\n*Shipping:* FREE (5-7 Days)\n*Payment:* Cash on Delivery\n\nPlease confirm availability and booking.`;
 
-    window.open(`https://wa.me/923245003393?text=${encodeURIComponent(text)}`, "_blank");
+    window.open(`https://wa.me/923302867560?text=${encodeURIComponent(text)}`, "_blank");
   };
 
   return (

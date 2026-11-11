@@ -152,7 +152,7 @@ export default async function PolicyPage({ params }: PolicyPageProps) {
             </p>
           </div>
           <a
-            href="https://wa.me/923245003393"
+            href="https://wa.me/923302867560"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 bg-[#25D366] text-black font-extrabold text-xs px-4 py-2.5 rounded-xl shadow-xs hover:opacity-95 transition"

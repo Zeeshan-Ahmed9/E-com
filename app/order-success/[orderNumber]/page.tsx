@@ -101,7 +101,7 @@ export default async function OrderSuccessPage({ params }: OrderSuccessProps) {
 
   // WhatsApp quick confirmation link
   const waConfirmationText = `Hello ZappMart! I have placed an order.\n\n*Order Number:* #${order.orderNumber}\n*Customer:* ${order.customerName}\n*City:* ${order.city}\n*Total Amount:* ${formatPKR(totalAmount)}\n*Payment Method:* 100% Cash on Delivery (Free Shipping)\n\nPlease confirm dispatch of my parcel.`;
-  const waUrl = `https://wa.me/923245003393?text=${encodeURIComponent(waConfirmationText)}`;
+  const waUrl = `https://wa.me/923302867560?text=${encodeURIComponent(waConfirmationText)}`;
 
   return (
     <div className="flex flex-col min-h-screen bg-[#fafafa]">

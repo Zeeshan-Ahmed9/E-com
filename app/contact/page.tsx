@@ -102,7 +102,7 @@ export default async function ContactPage() {
               </p>
 
               <a
-                href="https://wa.me/923245003393?text=Hello%20ZappMart!%20I%20need%20help%20with%20an%20order."
+                href="https://wa.me/923302867560?text=Hello%20ZappMart!%20I%20need%20help%20with%20an%20order."
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center justify-center gap-2.5 w-full bg-brand-whatsapp text-white py-3.5 rounded text-xs font-bold uppercase tracking-wider shadow-md hover:opacity-95 transition"
@@ -124,7 +124,7 @@ export default async function ContactPage() {
                     Phone & WhatsApp
                   </h4>
                   <a
-                    href="tel:+923245003393"
+                    href="tel:+923302867560"
                     className="text-xs font-semibold text-neutral-700 hover:text-black mt-0.5 block"
                   >
                     +92 324 5003393
