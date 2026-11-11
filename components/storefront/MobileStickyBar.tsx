@@ -33,11 +33,11 @@ export function MobileStickyBar({ onSearchClick, onCategoriesClick }: MobileStic
   };
 
   return (
-    <div className="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-black text-white border-t border-neutral-900 shadow-lg px-6 py-2.5 flex items-center justify-between select-none">
+    <div className="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-[#0B1220] text-white border-t border-[#131C33] shadow-lg px-6 py-2.5 flex items-center justify-between select-none">
       {/* Home */}
       <Link
         href="/"
-        className="flex flex-col items-center gap-0.5 text-neutral-300 hover:text-white"
+        className="flex flex-col items-center gap-0.5 text-[#8A92A6] hover:text-white"
         aria-label="Home"
       >
         <Home className="w-5 h-5 stroke-[1.75]" />
@@ -47,7 +47,7 @@ export function MobileStickyBar({ onSearchClick, onCategoriesClick }: MobileStic
       {/* Categories */}
       <button
         onClick={handleCategories}
-        className="flex flex-col items-center gap-0.5 text-neutral-300 hover:text-white focus:outline-none"
+        className="flex flex-col items-center gap-0.5 text-[#8A92A6] hover:text-white focus:outline-none cursor-pointer"
         aria-label="All Categories"
       >
         <Grid className="w-5 h-5 stroke-[1.75]" />
@@ -57,13 +57,13 @@ export function MobileStickyBar({ onSearchClick, onCategoriesClick }: MobileStic
       {/* Cart */}
       <button
         onClick={openCart}
-        className="flex flex-col items-center gap-0.5 text-neutral-300 hover:text-white relative focus:outline-none"
+        className="flex flex-col items-center gap-0.5 text-[#8A92A6] hover:text-white relative focus:outline-none cursor-pointer"
         aria-label="Cart"
       >
         <div className="relative">
           <ShoppingBag className="w-5 h-5 stroke-[1.75]" />
           {mounted && totalItems > 0 && (
-            <span className="absolute -top-1 -right-2 bg-brand-sale text-white text-[9px] font-bold w-4 h-4 rounded-full flex items-center justify-center">
+            <span className="absolute -top-1 -right-2 bg-[#FF4D2E] text-white text-[9px] font-bold w-4 h-4 rounded-full flex items-center justify-center">
               {totalItems > 99 ? "99+" : totalItems}
             </span>
           )}

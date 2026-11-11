@@ -3,7 +3,6 @@
 import Link from "next/link";
 import { useState } from "react";
 import { ArrowRight, Check } from "lucide-react";
-import { WaveDivider } from "./WaveDivider";
 
 interface CategoryNavItem {
   id: string;
@@ -28,33 +27,30 @@ export function Footer({ categories = [] }: FooterProps) {
   };
 
   return (
-    <footer className="relative bg-black text-white pt-6 pb-20 md:pb-12 border-t border-neutral-900 overflow-hidden">
-      {/* Top Wave Divider */}
-      <WaveDivider fillColor="#000000" className="-mt-14 sm:-mt-16 md:-mt-20 mb-8" />
-
-      <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
+    <footer className="relative bg-[#0B1220] text-white pt-14 pb-20 md:pb-12 border-t border-[#131C33] overflow-hidden select-none">
+      <div className="max-w-[1240px] mx-auto px-4 sm:px-6 lg:px-8">
         {/* Main 3-Column Footer Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-8 pb-12 border-b border-neutral-900">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-8 pb-12 border-b border-[#131C33]">
           {/* Column 1: Newsletter & Brand (5 cols) */}
           <div className="md:col-span-5 space-y-4">
             <Link href="/" className="inline-block">
-              <span className="text-2xl font-black tracking-tight uppercase text-white font-sans">
-                ZAPPMART
+              <span className="text-2xl font-black tracking-tight text-white font-sans flex items-center gap-1">
+                ZAPPMART<span className="w-2 h-2 rounded-full bg-[#FF4D2E] inline-block mb-1"></span>
               </span>
             </Link>
 
-            <h3 className="text-sm font-bold uppercase tracking-wider text-neutral-300">
-              Let&apos;s get in touch
+            <h3 className="text-xs font-bold uppercase tracking-wider text-[#FFB020]">
+              Stay Updated with Trending Deals
             </h3>
 
-            <p className="text-xs md:text-sm text-neutral-400 max-w-sm font-normal leading-relaxed">
-              Sign up for our newsletter and receive <strong>10% off</strong> your first order, plus exclusive early access to flash sales and new arrivals.
+            <p className="text-xs md:text-sm text-[#8A92A6] max-w-sm font-normal leading-relaxed">
+              Sign up to receive exclusive early access to flash sales, new trending product arrivals, and special discount codes.
             </p>
 
             {subscribed ? (
-              <div className="inline-flex items-center gap-2 bg-neutral-900 border border-neutral-800 text-emerald-400 text-xs px-4 py-2.5 rounded-full font-medium">
+              <div className="inline-flex items-center gap-2 bg-[#131C33] border border-[#12B76A]/40 text-[#12B76A] text-xs px-4 py-2.5 rounded-full font-medium">
                 <Check className="w-4 h-4" />
-                <span>Thank you! Check your inbox for your 10% discount code.</span>
+                <span>Thank you! You are subscribed to ZappMart updates.</span>
               </div>
             ) : (
               <form onSubmit={handleSubscribe} className="flex max-w-md">
@@ -64,11 +60,11 @@ export function Footer({ categories = [] }: FooterProps) {
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="Enter your email address..."
                   required
-                  className="w-full bg-white text-neutral-900 placeholder:text-neutral-400 text-xs md:text-sm px-4 py-2.5 rounded-l border-0 focus:outline-none"
+                  className="w-full bg-[#131C33] text-white placeholder:text-[#5B6478] text-xs md:text-sm px-4 py-3 rounded-l-full border border-[#131C33] focus:outline-none focus:border-[#FF4D2E]"
                 />
                 <button
                   type="submit"
-                  className="bg-neutral-800 hover:bg-neutral-700 text-white px-5 rounded-r flex items-center justify-center transition focus:outline-none"
+                  className="bg-gradient-to-r from-[#FF4D2E] to-[#FF7A45] hover:opacity-95 text-white px-6 rounded-r-full flex items-center justify-center transition focus:outline-none cursor-pointer"
                   aria-label="Submit newsletter"
                 >
                   <ArrowRight className="w-4 h-4" />
@@ -79,10 +75,10 @@ export function Footer({ categories = [] }: FooterProps) {
 
           {/* Column 2: Main Menu (4 cols) */}
           <div className="md:col-span-4 space-y-3">
-            <h4 className="text-xs font-bold uppercase tracking-widest text-white">
-              Main Menu
+            <h4 className="text-xs font-bold uppercase tracking-widest text-[#FFB020]">
+              Categories & Menu
             </h4>
-            <ul className="space-y-2 text-xs text-neutral-400">
+            <ul className="space-y-2 text-xs text-[#8A92A6]">
               <li>
                 <Link href="/" className="hover:text-white transition">
                   Home
@@ -110,10 +106,10 @@ export function Footer({ categories = [] }: FooterProps) {
 
           {/* Column 3: Useful Links (3 cols) */}
           <div className="md:col-span-3 space-y-3">
-            <h4 className="text-xs font-bold uppercase tracking-widest text-white">
-              Useful Links
+            <h4 className="text-xs font-bold uppercase tracking-widest text-[#FFB020]">
+              Customer Care & Policy
             </h4>
-            <ul className="space-y-2 text-xs text-neutral-400">
+            <ul className="space-y-2 text-xs text-[#8A92A6]">
               <li>
                 <Link href="/policies/privacy" className="hover:text-white transition">
                   Privacy Policy
@@ -121,12 +117,12 @@ export function Footer({ categories = [] }: FooterProps) {
               </li>
               <li>
                 <Link href="/policies/refund" className="hover:text-white transition">
-                  Refund & Return Policy
+                  Refund & Return Policy (7 Days)
                 </Link>
               </li>
               <li>
                 <Link href="/policies/shipping" className="hover:text-white transition">
-                  Shipping Policy (5-7 Days Free Delivery)
+                  Shipping Policy (100% Free Nationwide)
                 </Link>
               </li>
               <li>
@@ -139,7 +135,7 @@ export function Footer({ categories = [] }: FooterProps) {
                   href="https://wa.me/923245003393"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-brand-whatsapp hover:underline font-semibold"
+                  className="text-[#25D366] hover:underline font-semibold"
                 >
                   WhatsApp: +92 324 5003393
                 </a>
@@ -149,17 +145,18 @@ export function Footer({ categories = [] }: FooterProps) {
         </div>
 
         {/* Bottom Bar: Copyright & Payment Notes */}
-        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-neutral-500">
+        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-[#8A92A6]">
           <p>© {new Date().getFullYear()} ZAPPMART. All rights reserved.</p>
 
           <div className="flex items-center gap-6">
-            <span className="text-neutral-400 font-medium">Cash on Delivery Across Pakistan</span>
-            <span className="text-neutral-600">|</span>
-            <span className="text-neutral-400 font-medium">Safe & Verified Products</span>
+            <span className="text-white/80 font-medium">100% Cash on Delivery Across Pakistan</span>
+            <span className="text-[#131C33]">|</span>
+            <span className="text-[#12B76A] font-semibold flex items-center gap-1">
+              ✓ Verified Quality & Fast Dispatch
+            </span>
           </div>
         </div>
       </div>
     </footer>
   );
 }
-

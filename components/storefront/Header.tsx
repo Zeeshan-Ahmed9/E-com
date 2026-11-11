@@ -85,13 +85,13 @@ export function Header({ categories }: HeaderProps) {
 
   return (
     <>
-      <header className="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-neutral-100 transition-all shadow-2xs">
+      <header className="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-[#E7EAF3] transition-all shadow-2xs">
         <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 h-16 md:h-20 flex items-center justify-between">
-          {/* Left: Mobile Hamburger & Desktop Search Icon */}
-          <div className="flex items-center gap-3 w-1/4">
+          {/* Left: Mobile Hamburger & Desktop Trust Tagline */}
+          <div className="flex items-center gap-3 w-1/3">
             <button
               onClick={() => setIsMobileMenuOpen(true)}
-              className="md:hidden p-2 -ml-2 text-neutral-800 hover:text-black focus:outline-hidden cursor-pointer"
+              className="md:hidden p-2 -ml-2 text-[#0B1220] hover:text-[#FF4D2E] focus:outline-hidden cursor-pointer"
               aria-label="Open navigation menu"
             >
               <Menu className="w-6 h-6 stroke-[1.75]" />
@@ -99,14 +99,19 @@ export function Header({ categories }: HeaderProps) {
 
             <button
               onClick={() => setIsSearchOpen(!isSearchOpen)}
-              className="hidden md:flex items-center gap-2 text-neutral-800 hover:text-black px-3 py-1.5 rounded-full hover:bg-neutral-100/80 transition cursor-pointer"
+              className="hidden md:flex items-center gap-2 text-[#0B1220] hover:text-[#FF4D2E] px-3.5 py-1.5 rounded-full hover:bg-[#F6F7FB] transition cursor-pointer"
               aria-label="Search store"
             >
               <Search className="w-4 h-4 stroke-[2]" />
-              <span className="text-xs uppercase font-bold tracking-wider text-neutral-600">
+              <span className="text-xs uppercase font-bold tracking-wider text-[#5B6478]">
                 Search
               </span>
             </button>
+
+            <div className="hidden lg:flex items-center gap-1.5 text-[11px] font-medium text-[#5B6478] pl-2 border-l border-[#E7EAF3]">
+              <span className="text-[#12B76A] font-bold">✓</span>
+              <span>Cash on Delivery Across Pakistan</span>
+            </div>
           </div>
 
           {/* Center: Brand Logo */}
@@ -115,21 +120,21 @@ export function Header({ categories }: HeaderProps) {
               href="/"
               className="group flex flex-col items-center select-none"
             >
-              <span className="text-2xl md:text-3xl font-extrabold tracking-tight text-neutral-950 font-sans group-hover:opacity-90 transition">
-                ZAPPMART
+              <span className="text-2xl md:text-3xl font-extrabold tracking-tight text-[#0B1220] font-sans group-hover:text-[#FF4D2E] transition flex items-center gap-1">
+                ZAPPMART<span className="w-2 h-2 rounded-full bg-[#FF4D2E] inline-block mb-1"></span>
               </span>
-              <span className="text-[9px] tracking-[0.25em] uppercase text-neutral-400 font-bold -mt-1 hidden sm:block">
+              <span className="text-[9px] tracking-[0.22em] uppercase text-[#5B6478] font-bold -mt-1 hidden sm:block">
                 The Everything Store
               </span>
             </Link>
           </div>
 
           {/* Right: Wishlist & Cart Actions */}
-          <div className="flex items-center justify-end gap-2 md:gap-3 w-1/4">
+          <div className="flex items-center justify-end gap-2 md:gap-3 w-1/3">
             {/* Mobile Search Toggle */}
             <button
               onClick={() => setIsSearchOpen(!isSearchOpen)}
-              className="md:hidden p-2 text-neutral-800 hover:text-black cursor-pointer"
+              className="md:hidden p-2 text-[#0B1220] hover:text-[#FF4D2E] cursor-pointer"
               aria-label="Search"
             >
               <Search className="w-5 h-5 stroke-[1.75]" />
@@ -138,13 +143,13 @@ export function Header({ categories }: HeaderProps) {
             {/* Wishlist */}
             <Link
               href="/wishlist"
-              className="relative p-2 text-neutral-800 hover:text-black hover:bg-neutral-100/80 rounded-full transition cursor-pointer"
+              className="relative p-2 text-[#0B1220] hover:text-[#FF4D2E] hover:bg-[#F6F7FB] rounded-full transition cursor-pointer"
               aria-label="Wishlist"
               title="Saved items"
             >
               <Heart className="w-5 h-5 stroke-[1.75]" />
               {mounted && wishlistCount > 0 && (
-                <span className="absolute top-1 right-1 bg-black text-white text-[9px] font-bold w-4 h-4 rounded-full flex items-center justify-center">
+                <span className="absolute top-1 right-1 bg-[#0B1220] text-white text-[9px] font-bold w-4 h-4 rounded-full flex items-center justify-center">
                   {wishlistCount}
                 </span>
               )}
@@ -153,12 +158,12 @@ export function Header({ categories }: HeaderProps) {
             {/* Shopping Bag / Cart */}
             <button
               onClick={openCart}
-              className="relative p-2 text-neutral-800 hover:text-black hover:bg-neutral-100/80 rounded-full transition focus:outline-hidden cursor-pointer"
+              className="relative p-2 text-[#0B1220] hover:text-[#FF4D2E] hover:bg-[#F6F7FB] rounded-full transition focus:outline-hidden cursor-pointer"
               aria-label="View shopping cart"
             >
               <ShoppingBag className="w-5 h-5 md:w-6 md:h-6 stroke-[1.75]" />
               {mounted && totalItems > 0 && (
-                <span className="absolute top-1 right-1 bg-brand-sale text-white text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center animate-in zoom-in-50 duration-200">
+                <span className="absolute top-1 right-1 bg-[#FF4D2E] text-white text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center animate-in zoom-in-50 duration-200 shadow-sm">
                   {totalItems > 99 ? "99+" : totalItems}
                 </span>
               )}

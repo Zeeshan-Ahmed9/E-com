@@ -1,53 +1,84 @@
+@import url('https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700;800&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 0 0% 10%;
-    --card: 0 0% 100%;
-    --card-foreground: 0 0% 10%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 0 0% 10%;
-    --primary: 0 0% 0%;
+    --pm-ink: #0B1220;
+    --pm-ink2: #131C33;
+    --pm-accent: #FF4D2E;
+    --pm-accent2: #FF7A45;
+    --pm-gold: #FFB020;
+    --pm-green: #12B76A;
+    --pm-soft: #F6F7FB;
+    --pm-line: #E7EAF3;
+    --pm-muted: #5B6478;
+
+    --background: 220 33% 98%;
+    --foreground: 222 47% 8%;
+    --primary: 11 100% 59%;
     --primary-foreground: 0 0% 100%;
-    --secondary: 35 25% 94%;
-    --secondary-foreground: 0 0% 10%;
-    --muted: 0 0% 96%;
-    --muted-foreground: 0 0% 45%;
-    --accent: 0 0% 96%;
-    --accent-foreground: 0 0% 10%;
-    --destructive: 0 84% 60%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 0 0% 92%;
-    --input: 0 0% 92%;
-    --ring: 0 0% 0%;
-    --radius: 0.25rem;
+    --border: 224 36% 93%;
+    --radius: 1rem;
   }
 }
 
 body {
-  color: #1a1a1a;
-  background: #fdfdfd;
-  font-family: var(--font-jost), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  color: #0B1220;
+  background: #F6F7FB;
+  font-family: 'Poppins', 'Jost', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   overflow-x: hidden;
 }
 
-/* Custom continuous scrolling marquee */
+/* Zuu Collection Signature Keyframe Animations */
+@keyframes pm-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+@keyframes pm-burst {
+  0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 176, 32, 0.7); }
+  50% { transform: scale(1.06); box-shadow: 0 0 0 14px rgba(255, 176, 32, 0); }
+}
+
+@keyframes pm-blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.2; }
+}
+
+@keyframes pm-orb {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(25px, -20px) scale(1.12); }
+}
+
+.animate-pm-float {
+  animation: pm-float 5s ease-in-out infinite;
+}
+
+.animate-pm-burst {
+  animation: pm-burst 2.4s ease-in-out infinite;
+}
+
+.animate-pm-blink {
+  animation: pm-blink 1s steps(2) infinite;
+}
+
+.animate-pm-orb {
+  animation: pm-orb 14s ease-in-out infinite;
+}
+
+/* Continuous scrolling marquee */
 @keyframes continuousScroll {
-  0% {
-    transform: translateX(0%);
-  }
-  100% {
-    transform: translateX(-50%);
-  }
+  0% { transform: translateX(0%); }
+  100% { transform: translateX(-50%); }
 }
 
 .animate-marquee-infinite {
   display: flex;
   width: max-content;
-  animation: continuousScroll 25s linear infinite;
+  animation: continuousScroll 22s linear infinite;
 }
 
 .animate-marquee-infinite:hover {
@@ -62,9 +93,3 @@ body {
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
-
-/* 1:1 Square Aspect Ratio Media helper */
-.aspect-square-custom {
-  aspect-ratio: 1 / 1;
-}
-

@@ -38,13 +38,13 @@ export function MobileDrawer({ isOpen, onClose, categories = [] }: MobileDrawerP
       {/* Drawer Body */}
       <div className="fixed inset-y-0 left-0 w-[85%] max-w-sm bg-white shadow-2xl flex flex-col z-50 animate-in slide-in-from-left duration-300">
         {/* Top Header */}
-        <div className="px-5 py-4 border-b border-neutral-100 flex items-center justify-between">
-          <Link href="/" onClick={onClose} className="font-extrabold text-xl tracking-tight text-neutral-950">
-            ZAPPMART
+        <div className="px-5 py-4 border-b border-[#E7EAF3] flex items-center justify-between">
+          <Link href="/" onClick={onClose} className="font-extrabold text-xl tracking-tight text-[#0B1220] flex items-center gap-1">
+            ZAPPMART<span className="w-2 h-2 rounded-full bg-[#FF4D2E] inline-block mb-1"></span>
           </Link>
           <button
             onClick={onClose}
-            className="p-1.5 text-neutral-500 hover:text-black rounded-full hover:bg-neutral-100 transition"
+            className="p-1.5 text-[#5B6478] hover:text-[#0B1220] rounded-full hover:bg-[#F6F7FB] transition"
             aria-label="Close menu"
           >
             <X className="w-5 h-5" />
@@ -67,10 +67,10 @@ export function MobileDrawer({ isOpen, onClose, categories = [] }: MobileDrawerP
                     <Link
                       href={item.href}
                       onClick={onClose}
-                      className={`flex items-center justify-between py-3 text-sm font-semibold border-b border-neutral-50 transition ${
+                      className={`flex items-center justify-between py-3 text-sm font-semibold border-b border-[#E7EAF3]/60 transition ${
                         isActive
-                          ? "text-black bg-neutral-50 px-2 rounded"
-                          : "text-neutral-800 hover:text-black"
+                          ? "text-[#FF4D2E] bg-[#FFF6F3] px-3 rounded-xl"
+                          : "text-[#0B1220] hover:text-[#FF4D2E]"
                       }`}
                     >
                       <span className="flex items-center gap-3">

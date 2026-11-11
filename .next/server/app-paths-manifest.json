@@ -1,1 +1,6 @@
-{}
+{
+  "/api/admin/upload/route": "app/api/admin/upload/route.js",
+  "/products/[slug]/page": "app/products/[slug]/page.js",
+  "/page": "app/page.js",
+  "/admin-panel-zm982x/page": "app/admin-panel-zm982x/page.js"
+}

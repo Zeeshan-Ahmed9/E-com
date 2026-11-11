@@ -29,6 +29,7 @@ import {
   Eye,
   RefreshCw,
   Sparkles,
+  ImageIcon,
 } from "lucide-react";
 import { formatPKR } from "@/lib/utils";
 import {
@@ -108,7 +109,8 @@ export function AdminDashboardView({
   const [formBadge, setFormBadge] = useState("");
   const [formIsFeatured, setFormIsFeatured] = useState(false);
   const [formStatus, setFormStatus] = useState<"ACTIVE" | "DRAFT">("ACTIVE");
-  const [formImageUrl, setFormImageUrl] = useState("");
+  const [formImageUrls, setFormImageUrls] = useState<string[]>([]);
+  const [manualImageUrl, setManualImageUrl] = useState("");
   const [formError, setFormError] = useState("");
 
   // Copy private access link
@@ -135,7 +137,8 @@ export function AdminDashboardView({
     setFormBadge("");
     setFormIsFeatured(false);
     setFormStatus("ACTIVE");
-    setFormImageUrl("");
+    setFormImageUrls([]);
+    setManualImageUrl("");
     setFormError("");
     setIsModalOpen(true);
   };
@@ -154,39 +157,79 @@ export function AdminDashboardView({
     setFormBadge(p.badge || "");
     setFormIsFeatured(p.isFeatured);
     setFormStatus(p.status);
-    setFormImageUrl(p.images[0]?.url || "");
+    setFormImageUrls(
+      p.images && p.images.length > 0
+        ? p.images.map((img) => img.url)
+        : []
+    );
+    setManualImageUrl("");
     setFormError("");
     setIsModalOpen(true);
   };
 
-  // Cloudinary Image Upload Handler
+  // Cloudinary Image Upload Handler for multiple files
   const handleImageFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (!file) return;
+    const files = Array.from(e.target.files || []);
+    if (files.length === 0) return;
 
     setIsUploadingImage(true);
     setImageUploadError("");
 
     try {
-      const formData = new FormData();
-      formData.append("file", file);
+      const uploadPromises = files.map(async (file) => {
+        const formData = new FormData();
+        formData.append("file", file);
 
-      const res = await fetch("/api/admin/upload", {
-        method: "POST",
-        body: formData,
+        const res = await fetch("/api/admin/upload", {
+          method: "POST",
+          body: formData,
+        });
+
+        const data = await res.json();
+        if (!res.ok || !data.success) {
+          throw new Error(data.error || `Failed to upload ${file.name}`);
+        }
+
+        return data.url as string;
       });
 
-      const data = await res.json();
-      if (!res.ok || !data.success) {
-        throw new Error(data.error || "Failed to upload to Cloudinary");
-      }
-
-      setFormImageUrl(data.url);
+      const newUrls = await Promise.all(uploadPromises);
+      setFormImageUrls((prev) => [...prev, ...newUrls]);
     } catch (err: any) {
-      setImageUploadError(err.message || "Upload failed. Try entering image URL.");
+      setImageUploadError(err.message || "Failed to upload one or more images.");
     } finally {
       setIsUploadingImage(false);
+      e.target.value = "";
     }
+  };
+
+  // Manual URL Add Handler
+  const handleAddManualUrl = (e?: React.MouseEvent) => {
+    if (e) e.preventDefault();
+    const trimmed = manualImageUrl.trim();
+    if (!trimmed) return;
+    if (!trimmed.startsWith("http://") && !trimmed.startsWith("https://")) {
+      setImageUploadError("Please enter a valid URL starting with http:// or https://");
+      return;
+    }
+    setFormImageUrls((prev) => [...prev, trimmed]);
+    setManualImageUrl("");
+    setImageUploadError("");
+  };
+
+  // Remove an image by index
+  const handleRemoveImage = (index: number) => {
+    setFormImageUrls((prev) => prev.filter((_, i) => i !== index));
+  };
+
+  // Set an image as primary / cover (moves it to index 0)
+  const handleMakePrimary = (index: number) => {
+    if (index === 0) return;
+    setFormImageUrls((prev) => {
+      const target = prev[index];
+      const rest = prev.filter((_, i) => i !== index);
+      return [target, ...rest];
+    });
   };
 
   // Submit Product Form
@@ -204,8 +247,8 @@ export function AdminDashboardView({
       return;
     }
 
-    if (!formImageUrl.trim()) {
-      setFormError("Please upload an image or provide an image URL.");
+    if (formImageUrls.length === 0) {
+      setFormError("Please upload or add at least one product image (2 or 3 recommended).");
       return;
     }
 
@@ -222,7 +265,8 @@ export function AdminDashboardView({
           badge: formBadge,
           isFeatured: formIsFeatured,
           status: formStatus,
-          imageUrl: formImageUrl,
+          imageUrl: formImageUrls[0],
+          imageUrls: formImageUrls,
         });
 
         if (!res.success) {
@@ -231,6 +275,16 @@ export function AdminDashboardView({
         }
 
         // Update local state
+        const updatedImages = formImageUrls.map((url, idx) => ({
+          id: `img-${editingProduct.id}-${idx}`,
+          productId: editingProduct.id,
+          url,
+          alt: `${formName} ${idx + 1}`,
+          sortOrder: idx,
+          publicId: "",
+          createdAt: new Date().toISOString(),
+        }));
+
         setProducts((prev) =>
           prev.map((p) =>
             p.id === editingProduct.id
@@ -245,7 +299,7 @@ export function AdminDashboardView({
                   badge: formBadge || null,
                   isFeatured: formIsFeatured,
                   status: formStatus,
-                  images: [{ ...p.images[0], url: formImageUrl, id: p.images[0]?.id || "img-1", publicId: "", alt: formName, sortOrder: 0 }],
+                  images: updatedImages,
                 }
               : p
           )
@@ -264,7 +318,8 @@ export function AdminDashboardView({
           badge: formBadge,
           isFeatured: formIsFeatured,
           status: formStatus,
-          imageUrl: formImageUrl,
+          imageUrl: formImageUrls[0],
+          imageUrls: formImageUrls,
         };
 
         const res = await createProduct(payload);
@@ -663,6 +718,14 @@ export function AdminDashboardView({
                                     className="object-cover"
                                     sizes="48px"
                                   />
+                                  {p.images && p.images.length > 1 && (
+                                    <span
+                                      className="absolute bottom-0 right-0 bg-black/85 text-white text-[9px] font-bold px-1 py-0.5 rounded-tl backdrop-blur-xs flex items-center gap-0.5"
+                                      title={`${p.images.length} photos uploaded`}
+                                    >
+                                      📷 {p.images.length}
+                                    </span>
+                                  )}
                                 </div>
                                 <div>
                                   <div className="font-bold text-white line-clamp-1">{p.name}</div>
@@ -1185,26 +1248,36 @@ export function AdminDashboardView({
                 </div>
               </div>
 
-              {/* Cloudinary Image Upload & Preview */}
+              {/* Cloudinary Multi-Image Upload & Preview */}
               <div>
-                <label className="block font-semibold uppercase tracking-wider text-neutral-300 mb-1.5">
-                  Product Image * (Cloudinary Upload or Direct URL)
-                </label>
+                <div className="flex items-center justify-between mb-1.5">
+                  <label className="block font-semibold uppercase tracking-wider text-neutral-300 text-xs">
+                    Product Images * ({formImageUrls.length} added — 2 or 3 recommended)
+                  </label>
+                  {formImageUrls.length > 0 && (
+                    <span className="text-[11px] text-[#FF7A45] font-semibold">
+                      ★ First image is Primary Cover
+                    </span>
+                  )}
+                </div>
 
-                <div className="grid grid-cols-1 sm:grid-cols-12 gap-4 items-start">
+                <div className="grid grid-cols-1 md:grid-cols-12 gap-4 items-start">
                   {/* File Upload Button / Area */}
-                  <div className="sm:col-span-7 space-y-2">
-                    <label className="flex flex-col items-center justify-center p-4 border-2 border-dashed border-neutral-800 hover:border-neutral-700 rounded-2xl cursor-pointer bg-neutral-900/50 transition-colors">
-                      <Upload className="w-5 h-5 text-neutral-400 mb-1" />
-                      <span className="text-xs font-semibold text-neutral-200">
-                        {isUploadingImage ? "Uploading to Cloudinary..." : "Choose Image from Device"}
+                  <div className="md:col-span-6 space-y-2.5">
+                    <label className="flex flex-col items-center justify-center p-4 border-2 border-dashed border-neutral-700 hover:border-[#FF4D2E] rounded-2xl cursor-pointer bg-neutral-900/60 hover:bg-neutral-900 transition-all text-center group">
+                      <Upload className="w-5 h-5 text-neutral-400 group-hover:text-[#FF4D2E] mb-1 transition-colors" />
+                      <span className="text-xs font-bold text-neutral-200 group-hover:text-white">
+                        {isUploadingImage
+                          ? "Uploading to Cloudinary..."
+                          : "Choose 2 or 3 Images from Device"}
                       </span>
-                      <span className="text-[10px] text-neutral-500 mt-0.5">
-                        PNG, JPG, WEBP up to 10MB
+                      <span className="text-[10px] text-neutral-400 mt-0.5">
+                        Select multiple photos (PNG, JPG, WEBP)
                       </span>
                       <input
                         type="file"
                         accept="image/*"
+                        multiple
                         onChange={handleImageFileChange}
                         disabled={isUploadingImage}
                         className="hidden"
@@ -1212,17 +1285,32 @@ export function AdminDashboardView({
                     </label>
 
                     {/* Or URL Input */}
-                    <div className="relative">
-                      <span className="text-[10px] text-neutral-500 block mb-1">
+                    <div>
+                      <span className="text-[10px] text-neutral-400 block mb-1">
                         Or paste image link:
                       </span>
-                      <input
-                        type="url"
-                        placeholder="https://..."
-                        value={formImageUrl}
-                        onChange={(e) => setFormImageUrl(e.target.value)}
-                        className="w-full px-3 py-2 bg-neutral-900 border border-neutral-800 rounded-xl text-xs text-white placeholder:text-neutral-500 focus:outline-hidden focus:border-white"
-                      />
+                      <div className="flex gap-2">
+                        <input
+                          type="url"
+                          placeholder="https://..."
+                          value={manualImageUrl}
+                          onChange={(e) => setManualImageUrl(e.target.value)}
+                          onKeyDown={(e) => {
+                            if (e.key === "Enter") {
+                              e.preventDefault();
+                              handleAddManualUrl();
+                            }
+                          }}
+                          className="flex-1 px-3 py-2 bg-neutral-900 border border-neutral-800 rounded-xl text-xs text-white placeholder:text-neutral-500 focus:outline-hidden focus:border-white"
+                        />
+                        <button
+                          type="button"
+                          onClick={handleAddManualUrl}
+                          className="px-3.5 py-2 bg-neutral-800 hover:bg-neutral-700 text-white rounded-xl text-xs font-bold shrink-0 cursor-pointer transition-colors"
+                        >
+                          + Add
+                        </button>
+                      </div>
                     </div>
 
                     {imageUploadError && (
@@ -1230,34 +1318,78 @@ export function AdminDashboardView({
                     )}
                   </div>
 
-                  {/* Image Preview Box */}
-                  <div className="sm:col-span-5 flex flex-col items-center">
-                    <div className="relative w-full h-36 rounded-2xl bg-neutral-900 border border-neutral-800 overflow-hidden flex items-center justify-center">
-                      {formImageUrl ? (
-                        <>
-                          <Image
-                            src={formImageUrl}
-                            alt="Preview"
-                            fill
-                            className="object-cover"
-                            sizes="200px"
-                          />
-                          <button
-                            type="button"
-                            onClick={() => setFormImageUrl("")}
-                            className="absolute top-2 right-2 bg-black/70 hover:bg-black text-white p-1 rounded-full text-xs"
-                            title="Remove image"
-                          >
-                            ✕
-                          </button>
-                        </>
-                      ) : (
-                        <div className="text-center text-neutral-600 p-2">
-                          <Package className="w-8 h-8 mx-auto mb-1 opacity-50" />
-                          <span className="text-[11px]">No Image Selected</span>
+                  {/* Multi-Image Thumbnails Gallery */}
+                  <div className="md:col-span-6">
+                    {formImageUrls.length === 0 ? (
+                      <div className="h-40 border border-neutral-800 rounded-2xl bg-neutral-900/40 flex flex-col items-center justify-center text-center p-4">
+                        <Package className="w-8 h-8 text-neutral-600 mb-1.5 opacity-50" />
+                        <span className="text-xs text-neutral-400 font-medium">No Images Selected</span>
+                        <span className="text-[10px] text-neutral-500 mt-0.5">
+                          Upload 2 or 3 photos for multiple angles & zoom
+                        </span>
+                      </div>
+                    ) : (
+                      <div className="space-y-1.5">
+                        <div className="grid grid-cols-3 gap-2 max-h-48 overflow-y-auto p-1.5 bg-neutral-900/50 rounded-2xl border border-neutral-800">
+                          {formImageUrls.map((url, idx) => (
+                            <div
+                              key={`${url}-${idx}`}
+                              className={`relative rounded-xl overflow-hidden border bg-neutral-950 aspect-square group flex flex-col justify-between ${
+                                idx === 0
+                                  ? "border-[#FF4D2E] ring-2 ring-[#FF4D2E]/40"
+                                  : "border-neutral-800 hover:border-neutral-700"
+                              }`}
+                            >
+                              <Image
+                                src={url}
+                                alt={`Product view ${idx + 1}`}
+                                fill
+                                className="object-cover"
+                                sizes="100px"
+                              />
+
+                              {/* Top Badge: Cover vs Photo # */}
+                              <div className="absolute top-1 left-1 z-10">
+                                {idx === 0 ? (
+                                  <span className="bg-[#FF4D2E] text-white text-[9px] font-black px-1.5 py-0.5 rounded shadow-sm">
+                                    COVER
+                                  </span>
+                                ) : (
+                                  <span className="bg-black/75 backdrop-blur-xs text-white text-[9px] font-semibold px-1.5 py-0.5 rounded">
+                                    #{idx + 1}
+                                  </span>
+                                )}
+                              </div>
+
+                              {/* Remove Button */}
+                              <button
+                                type="button"
+                                onClick={() => handleRemoveImage(idx)}
+                                className="absolute top-1 right-1 z-10 w-5 h-5 rounded-full bg-black/80 hover:bg-red-600 text-white flex items-center justify-center text-[10px] transition-colors cursor-pointer"
+                                title="Remove image"
+                              >
+                                ✕
+                              </button>
+
+                              {/* Set Primary Button for non-cover images */}
+                              {idx > 0 && (
+                                <button
+                                  type="button"
+                                  onClick={() => handleMakePrimary(idx)}
+                                  className="absolute bottom-1 inset-x-1 z-10 bg-black/85 hover:bg-[#FF4D2E] text-[9px] font-bold text-white py-0.5 rounded text-center transition-colors opacity-90 group-hover:opacity-100 cursor-pointer"
+                                  title="Make this the main cover image"
+                                >
+                                  Set Cover
+                                </button>
+                              )}
+                            </div>
+                          ))}
                         </div>
-                      )}
-                    </div>
+                        <p className="text-[10px] text-neutral-400 px-1">
+                          Tip: Click <strong className="text-white">Set Cover</strong> on any photo to make it the primary store card image.
+                        </p>
+                      </div>
+                    )}
                   </div>
                 </div>
               </div>

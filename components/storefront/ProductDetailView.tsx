@@ -203,6 +203,15 @@ export function ProductDetailView({ product }: ProductDetailProps) {
                 }`}
               />
             </motion.button>
+
+            {/* Multiple Images Counter indicator */}
+            {product.images.length > 1 && (
+              <div className="absolute bottom-4 right-4 z-10 bg-neutral-950/80 text-white text-[11px] font-bold px-2.5 py-1 rounded-full backdrop-blur-xs flex items-center gap-1 shadow-sm">
+                <span>{selectedImageIndex + 1}</span>
+                <span className="text-neutral-400 font-normal">/</span>
+                <span>{product.images.length}</span>
+              </div>
+            )}
           </div>
 
           {/* Thumbnails Row */}
@@ -215,8 +224,8 @@ export function ProductDetailView({ product }: ProductDetailProps) {
                   onClick={() => setSelectedImageIndex(idx)}
                   className={`relative w-20 h-20 rounded-xl overflow-hidden shrink-0 border-2 transition-all cursor-pointer ${
                     selectedImageIndex === idx
-                      ? "border-black shadow-md scale-95"
-                      : "border-transparent opacity-70 hover:opacity-100"
+                      ? "border-[#FF4D2E] ring-2 ring-[#FF4D2E]/30 shadow-md scale-95"
+                      : "border-neutral-200 opacity-70 hover:opacity-100 hover:border-neutral-400"
                   }`}
                   aria-label={`View image ${idx + 1}`}
                 >

@@ -105,12 +105,13 @@ export interface CreateProductInput {
   badge?: string;
   isFeatured?: boolean;
   status?: "ACTIVE" | "DRAFT";
-  imageUrl: string;
+  imageUrl?: string;
+  imageUrls?: string[];
   imagePublicId?: string;
 }
 
 /**
- * Create a new product with image and dynamic category, then revalidate storefront.
+ * Create a new product with multiple images and dynamic category, then revalidate storefront.
  */
 export async function createProduct(input: CreateProductInput): Promise<{
   success: boolean;
@@ -130,6 +131,7 @@ export async function createProduct(input: CreateProductInput): Promise<{
       isFeatured = false,
       status = "ACTIVE",
       imageUrl,
+      imageUrls,
       imagePublicId = "",
     } = input;
 
@@ -141,8 +143,19 @@ export async function createProduct(input: CreateProductInput): Promise<{
       return { success: false, error: "Valid sale price is required." };
     }
 
-    if (!imageUrl || imageUrl.trim().length < 5) {
-      return { success: false, error: "A product image is required (upload or provide URL)." };
+    // Support both single imageUrl and multiple imageUrls array (2, 3 or more images)
+    const effectiveImages: string[] =
+      imageUrls && imageUrls.length > 0
+        ? imageUrls.map((u) => u.trim()).filter((u) => u.length > 4)
+        : imageUrl && imageUrl.trim().length > 4
+        ? [imageUrl.trim()]
+        : [];
+
+    if (effectiveImages.length === 0) {
+      return {
+        success: false,
+        error: "At least one product image is required (upload 1, 2, or 3 images).",
+      };
     }
 
     return await withDbRetry(async () => {
@@ -163,7 +176,7 @@ export async function createProduct(input: CreateProductInput): Promise<{
               name: newCategoryName.trim(),
               slug: catSlug,
               description: `${newCategoryName.trim()} products at ZappMart`,
-              imageUrl: imageUrl.trim(),
+              imageUrl: effectiveImages[0] || "",
             },
           });
           targetCategoryId = newCat.id;
@@ -200,7 +213,8 @@ export async function createProduct(input: CreateProductInput): Promise<{
         data: {
           name: name.trim(),
           slug: uniqueSlug,
-          description: description?.trim() || `${name.trim()} - Premium quality guaranteed at ZappMart.`,
+          description:
+            description?.trim() || `${name.trim()} - Premium quality guaranteed at ZappMart.`,
           regularPrice: Number(regularPrice) || Number(salePrice),
           salePrice: Number(salePrice),
           stockQuantity: Number(stockQuantity) || 10,
@@ -209,19 +223,17 @@ export async function createProduct(input: CreateProductInput): Promise<{
           isFeatured: Boolean(isFeatured),
           categoryId: targetCategoryId,
           images: {
-            create: [
-              {
-                url: imageUrl.trim(),
-                publicId: imagePublicId || "",
-                alt: name.trim(),
-                sortOrder: 0,
-              },
-            ],
+            create: effectiveImages.map((imgUrl, sortIdx) => ({
+              url: imgUrl,
+              publicId: sortIdx === 0 ? imagePublicId || "" : "",
+              alt: `${name.trim()} view ${sortIdx + 1}`,
+              sortOrder: sortIdx,
+            })),
           },
         },
         include: {
           category: { select: { id: true, name: true, slug: true } },
-          images: true,
+          images: { orderBy: { sortOrder: "asc" } },
         },
       });
 
@@ -253,6 +265,7 @@ export interface UpdateProductInput {
   isFeatured?: boolean;
   status: "ACTIVE" | "DRAFT";
   imageUrl?: string;
+  imageUrls?: string[];
 }
 
 /**
@@ -264,7 +277,7 @@ export async function updateProduct(
 ): Promise<{ success: boolean; error?: string }> {
   try {
     return await withDbRetry(async () => {
-      await prisma.product.update({
+      const updatedProduct = await prisma.product.update({
         where: { id },
         data: {
           name: input.name.trim(),
@@ -279,7 +292,23 @@ export async function updateProduct(
         },
       });
 
-      if (input.imageUrl && input.imageUrl.trim()) {
+      // Update multiple images if provided, or single image fallback
+      if (input.imageUrls && input.imageUrls.length > 0) {
+        const cleanUrls = input.imageUrls.map((u) => u.trim()).filter((u) => u.length > 4);
+        if (cleanUrls.length > 0) {
+          await prisma.productImage.deleteMany({
+            where: { productId: id },
+          });
+          await prisma.productImage.createMany({
+            data: cleanUrls.map((url, sortIdx) => ({
+              productId: id,
+              url,
+              alt: `${input.name.trim()} view ${sortIdx + 1}`,
+              sortOrder: sortIdx,
+            })),
+          });
+        }
+      } else if (input.imageUrl && input.imageUrl.trim()) {
         const existingImg = await prisma.productImage.findFirst({
           where: { productId: id },
         });
@@ -302,6 +331,9 @@ export async function updateProduct(
 
       revalidatePath("/");
       revalidatePath("/products");
+      if (updatedProduct?.slug) {
+        revalidatePath(`/products/${updatedProduct.slug}`);
+      }
       revalidatePath("/collections/[slug]", "page");
 
       return { success: true };

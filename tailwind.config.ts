@@ -10,22 +10,39 @@ const config: Config = {
   theme: {
     extend: {
       fontFamily: {
-        sans: ["var(--font-jost)", "sans-serif"],
+        sans: ["Poppins", "Jost", "-apple-system", "BlinkMacSystemFont", "Segoe UI", "Roboto", "sans-serif"],
       },
       colors: {
-        brand: {
-          black: "#000000",
-          charcoal: "#111111",
-          foreground: "#1A1A1A",
-          white: "#FFFFFF",
-          surface: "#FDFDFD",
-          warm: "#EFE7DD",
-          border: "#EEEEEE",
-          muted: "#6B6B6B",
-          sale: "#E84E4E",
-          whatsapp: "#25D366",
-          gold: "#FFD700",
+        zuu: {
+          ink: "#0B1220",       // Primary Deep Navy Obsidian
+          ink2: "#131C33",      // Secondary Deep Navy
+          accent: "#FF4D2E",    // Signature Flame Coral / Sale Red
+          accent2: "#FF7A45",   // Secondary Warm Coral Orange
+          gold: "#FFB020",      // Warm Amber Gold
+          green: "#12B76A",     // Emerald Green (COD / verified)
+          soft: "#F6F7FB",      // Soft light gray-blue background
+          line: "#E7EAF3",      // Light separator border
+          muted: "#5B6478",     // Subtitle text color
+          card: "#FFFFFF",
         },
+        brand: {
+          black: "#0B1220",
+          charcoal: "#131C33",
+          foreground: "#0B1220",
+          white: "#FFFFFF",
+          surface: "#F6F7FB",
+          warm: "#FFF6F3",
+          border: "#E7EAF3",
+          muted: "#5B6478",
+          sale: "#FF4D2E",
+          whatsapp: "#25D366",
+          gold: "#FFB020",
+          green: "#12B76A",
+        },
+      },
+      borderRadius: {
+        "2xl": "16px",
+        "3xl": "20px",
       },
       animation: {
         marquee: "marquee 22s linear infinite",
@@ -42,4 +59,3 @@ const config: Config = {
 };
 
 export default config;
-
