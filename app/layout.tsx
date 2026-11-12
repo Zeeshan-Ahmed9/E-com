@@ -1,7 +1,9 @@
+
 import type { Metadata } from "next";
 import "./globals.css";
 import { WhatsAppFloatingButton } from "@/components/storefront/WhatsAppFloatingButton";
 import { CartDrawer } from "@/components/storefront/CartDrawer";
+import { Analytics } from "@vercel/analytics/next";
 
 export const metadata: Metadata = {
   title: "ZappMart — Online Shopping in Pakistan | Cash on Delivery",
@@ -23,6 +25,7 @@ export default function RootLayout({
         {children}
         <CartDrawer />
         <WhatsAppFloatingButton />
+        <Analytics />
       </body>
     </html>
   );

@@ -1,103 +1,98 @@
 {
   "node": {
-    "008759cfe1038b2306c5c651a8c6ba6a9388a3dbf0": {
+    "403b5de378c550f90db60eaf29e6d63924853a813d": {
       "workers": {
-        "app/admin-panel-zm982x/page": {
-          "moduleId": "(rsc)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CProjects%5C%5CE-com%5C%5Capp%5C%5Cactions%5C%5Cadmin.ts%22%2C%5B%5B%22008759cfe1038b2306c5c651a8c6ba6a9388a3dbf0%22%2C%22getAdminDashboardData%22%5D%2C%5B%224013050089003fa45cb24925ab127caf1ba69f1fcf%22%2C%22deleteProduct%22%5D%2C%5B%22402bc1e3d7825e3e43cb8bb9d9ed8992b65d99c563%22%2C%22deleteOrder%22%5D%2C%5B%224055d7c97ba71b5cb44fc007222e5bb8655e8a2dc5%22%2C%22createProduct%22%5D%2C%5B%22600427e9f16aa91e96530f06430f0c5ffeab6c80c6%22%2C%22toggleProductStatus%22%5D%2C%5B%226067e26dc50550e9a80b0b0b1c69848081138bd87c%22%2C%22createCategory%22%5D%2C%5B%22607ba24d6a327a9af1cabb9fc8831d2efee620bf3a%22%2C%22updateProduct%22%5D%2C%5B%2260902e467ff4fbf2fcdebfe1ec28d40216aa963f08%22%2C%22updateOrderStatus%22%5D%5D%5D%5D&__client_imported__=!",
+        "app/api/checkout/route": {
+          "moduleId": 74894,
           "async": false
-        }
-      },
-      "layer": {
-        "app/admin-panel-zm982x/page": "rsc"
-      }
-    },
-    "4013050089003fa45cb24925ab127caf1ba69f1fcf": {
-      "workers": {
-        "app/admin-panel-zm982x/page": {
-          "moduleId": "(rsc)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CProjects%5C%5CE-com%5C%5Capp%5C%5Cactions%5C%5Cadmin.ts%22%2C%5B%5B%22008759cfe1038b2306c5c651a8c6ba6a9388a3dbf0%22%2C%22getAdminDashboardData%22%5D%2C%5B%224013050089003fa45cb24925ab127caf1ba69f1fcf%22%2C%22deleteProduct%22%5D%2C%5B%22402bc1e3d7825e3e43cb8bb9d9ed8992b65d99c563%22%2C%22deleteOrder%22%5D%2C%5B%224055d7c97ba71b5cb44fc007222e5bb8655e8a2dc5%22%2C%22createProduct%22%5D%2C%5B%22600427e9f16aa91e96530f06430f0c5ffeab6c80c6%22%2C%22toggleProductStatus%22%5D%2C%5B%226067e26dc50550e9a80b0b0b1c69848081138bd87c%22%2C%22createCategory%22%5D%2C%5B%22607ba24d6a327a9af1cabb9fc8831d2efee620bf3a%22%2C%22updateProduct%22%5D%2C%5B%2260902e467ff4fbf2fcdebfe1ec28d40216aa963f08%22%2C%22updateOrderStatus%22%5D%5D%5D%5D&__client_imported__=!",
-          "async": false
-        }
-      },
-      "layer": {
-        "app/admin-panel-zm982x/page": "rsc"
-      }
-    },
-    "402bc1e3d7825e3e43cb8bb9d9ed8992b65d99c563": {
-      "workers": {
-        "app/admin-panel-zm982x/page": {
-          "moduleId": "(rsc)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CProjects%5C%5CE-com%5C%5Capp%5C%5Cactions%5C%5Cadmin.ts%22%2C%5B%5B%22008759cfe1038b2306c5c651a8c6ba6a9388a3dbf0%22%2C%22getAdminDashboardData%22%5D%2C%5B%224013050089003fa45cb24925ab127caf1ba69f1fcf%22%2C%22deleteProduct%22%5D%2C%5B%22402bc1e3d7825e3e43cb8bb9d9ed8992b65d99c563%22%2C%22deleteOrder%22%5D%2C%5B%224055d7c97ba71b5cb44fc007222e5bb8655e8a2dc5%22%2C%22createProduct%22%5D%2C%5B%22600427e9f16aa91e96530f06430f0c5ffeab6c80c6%22%2C%22toggleProductStatus%22%5D%2C%5B%226067e26dc50550e9a80b0b0b1c69848081138bd87c%22%2C%22createCategory%22%5D%2C%5B%22607ba24d6a327a9af1cabb9fc8831d2efee620bf3a%22%2C%22updateProduct%22%5D%2C%5B%2260902e467ff4fbf2fcdebfe1ec28d40216aa963f08%22%2C%22updateOrderStatus%22%5D%5D%5D%5D&__client_imported__=!",
-          "async": false
-        }
-      },
-      "layer": {
-        "app/admin-panel-zm982x/page": "rsc"
-      }
-    },
-    "4055d7c97ba71b5cb44fc007222e5bb8655e8a2dc5": {
-      "workers": {
-        "app/admin-panel-zm982x/page": {
-          "moduleId": "(rsc)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CProjects%5C%5CE-com%5C%5Capp%5C%5Cactions%5C%5Cadmin.ts%22%2C%5B%5B%22008759cfe1038b2306c5c651a8c6ba6a9388a3dbf0%22%2C%22getAdminDashboardData%22%5D%2C%5B%224013050089003fa45cb24925ab127caf1ba69f1fcf%22%2C%22deleteProduct%22%5D%2C%5B%22402bc1e3d7825e3e43cb8bb9d9ed8992b65d99c563%22%2C%22deleteOrder%22%5D%2C%5B%224055d7c97ba71b5cb44fc007222e5bb8655e8a2dc5%22%2C%22createProduct%22%5D%2C%5B%22600427e9f16aa91e96530f06430f0c5ffeab6c80c6%22%2C%22toggleProductStatus%22%5D%2C%5B%226067e26dc50550e9a80b0b0b1c69848081138bd87c%22%2C%22createCategory%22%5D%2C%5B%22607ba24d6a327a9af1cabb9fc8831d2efee620bf3a%22%2C%22updateProduct%22%5D%2C%5B%2260902e467ff4fbf2fcdebfe1ec28d40216aa963f08%22%2C%22updateOrderStatus%22%5D%5D%5D%5D&__client_imported__=!",
-          "async": false
-        }
-      },
-      "layer": {
-        "app/admin-panel-zm982x/page": "rsc"
-      }
-    },
-    "600427e9f16aa91e96530f06430f0c5ffeab6c80c6": {
-      "workers": {
-        "app/admin-panel-zm982x/page": {
-          "moduleId": "(rsc)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CProjects%5C%5CE-com%5C%5Capp%5C%5Cactions%5C%5Cadmin.ts%22%2C%5B%5B%22008759cfe1038b2306c5c651a8c6ba6a9388a3dbf0%22%2C%22getAdminDashboardData%22%5D%2C%5B%224013050089003fa45cb24925ab127caf1ba69f1fcf%22%2C%22deleteProduct%22%5D%2C%5B%22402bc1e3d7825e3e43cb8bb9d9ed8992b65d99c563%22%2C%22deleteOrder%22%5D%2C%5B%224055d7c97ba71b5cb44fc007222e5bb8655e8a2dc5%22%2C%22createProduct%22%5D%2C%5B%22600427e9f16aa91e96530f06430f0c5ffeab6c80c6%22%2C%22toggleProductStatus%22%5D%2C%5B%226067e26dc50550e9a80b0b0b1c69848081138bd87c%22%2C%22createCategory%22%5D%2C%5B%22607ba24d6a327a9af1cabb9fc8831d2efee620bf3a%22%2C%22updateProduct%22%5D%2C%5B%2260902e467ff4fbf2fcdebfe1ec28d40216aa963f08%22%2C%22updateOrderStatus%22%5D%5D%5D%5D&__client_imported__=!",
-          "async": false
-        }
-      },
-      "layer": {
-        "app/admin-panel-zm982x/page": "rsc"
-      }
-    },
-    "6067e26dc50550e9a80b0b0b1c69848081138bd87c": {
-      "workers": {
-        "app/admin-panel-zm982x/page": {
-          "moduleId": "(rsc)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CProjects%5C%5CE-com%5C%5Capp%5C%5Cactions%5C%5Cadmin.ts%22%2C%5B%5B%22008759cfe1038b2306c5c651a8c6ba6a9388a3dbf0%22%2C%22getAdminDashboardData%22%5D%2C%5B%224013050089003fa45cb24925ab127caf1ba69f1fcf%22%2C%22deleteProduct%22%5D%2C%5B%22402bc1e3d7825e3e43cb8bb9d9ed8992b65d99c563%22%2C%22deleteOrder%22%5D%2C%5B%224055d7c97ba71b5cb44fc007222e5bb8655e8a2dc5%22%2C%22createProduct%22%5D%2C%5B%22600427e9f16aa91e96530f06430f0c5ffeab6c80c6%22%2C%22toggleProductStatus%22%5D%2C%5B%226067e26dc50550e9a80b0b0b1c69848081138bd87c%22%2C%22createCategory%22%5D%2C%5B%22607ba24d6a327a9af1cabb9fc8831d2efee620bf3a%22%2C%22updateProduct%22%5D%2C%5B%2260902e467ff4fbf2fcdebfe1ec28d40216aa963f08%22%2C%22updateOrderStatus%22%5D%5D%5D%5D&__client_imported__=!",
-          "async": false
-        }
-      },
-      "layer": {
-        "app/admin-panel-zm982x/page": "rsc"
-      }
-    },
-    "607ba24d6a327a9af1cabb9fc8831d2efee620bf3a": {
-      "workers": {
-        "app/admin-panel-zm982x/page": {
-          "moduleId": "(rsc)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CProjects%5C%5CE-com%5C%5Capp%5C%5Cactions%5C%5Cadmin.ts%22%2C%5B%5B%22008759cfe1038b2306c5c651a8c6ba6a9388a3dbf0%22%2C%22getAdminDashboardData%22%5D%2C%5B%224013050089003fa45cb24925ab127caf1ba69f1fcf%22%2C%22deleteProduct%22%5D%2C%5B%22402bc1e3d7825e3e43cb8bb9d9ed8992b65d99c563%22%2C%22deleteOrder%22%5D%2C%5B%224055d7c97ba71b5cb44fc007222e5bb8655e8a2dc5%22%2C%22createProduct%22%5D%2C%5B%22600427e9f16aa91e96530f06430f0c5ffeab6c80c6%22%2C%22toggleProductStatus%22%5D%2C%5B%226067e26dc50550e9a80b0b0b1c69848081138bd87c%22%2C%22createCategory%22%5D%2C%5B%22607ba24d6a327a9af1cabb9fc8831d2efee620bf3a%22%2C%22updateProduct%22%5D%2C%5B%2260902e467ff4fbf2fcdebfe1ec28d40216aa963f08%22%2C%22updateOrderStatus%22%5D%5D%5D%5D&__client_imported__=!",
-          "async": false
-        }
-      },
-      "layer": {
-        "app/admin-panel-zm982x/page": "rsc"
-      }
-    },
-    "60902e467ff4fbf2fcdebfe1ec28d40216aa963f08": {
-      "workers": {
-        "app/admin-panel-zm982x/page": {
-          "moduleId": "(rsc)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CProjects%5C%5CE-com%5C%5Capp%5C%5Cactions%5C%5Cadmin.ts%22%2C%5B%5B%22008759cfe1038b2306c5c651a8c6ba6a9388a3dbf0%22%2C%22getAdminDashboardData%22%5D%2C%5B%224013050089003fa45cb24925ab127caf1ba69f1fcf%22%2C%22deleteProduct%22%5D%2C%5B%22402bc1e3d7825e3e43cb8bb9d9ed8992b65d99c563%22%2C%22deleteOrder%22%5D%2C%5B%224055d7c97ba71b5cb44fc007222e5bb8655e8a2dc5%22%2C%22createProduct%22%5D%2C%5B%22600427e9f16aa91e96530f06430f0c5ffeab6c80c6%22%2C%22toggleProductStatus%22%5D%2C%5B%226067e26dc50550e9a80b0b0b1c69848081138bd87c%22%2C%22createCategory%22%5D%2C%5B%22607ba24d6a327a9af1cabb9fc8831d2efee620bf3a%22%2C%22updateProduct%22%5D%2C%5B%2260902e467ff4fbf2fcdebfe1ec28d40216aa963f08%22%2C%22updateOrderStatus%22%5D%5D%5D%5D&__client_imported__=!",
-          "async": false
-        }
-      },
-      "layer": {
-        "app/admin-panel-zm982x/page": "rsc"
-      }
-    },
-    "40d4cc3aa549b2a81e236e627a5f798d6cb858f6fe": {
-      "workers": {
+        },
         "app/checkout/page": {
-          "moduleId": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CProjects%5C%5CE-com%5C%5Capp%5C%5Cactions%5C%5Ccheckout.ts%22%2C%5B%5B%2240d4cc3aa549b2a81e236e627a5f798d6cb858f6fe%22%2C%22placeOrder%22%5D%5D%5D%5D&__client_imported__=true!",
+          "moduleId": 93229,
           "async": false
         }
       },
-      "layer": {
-        "app/checkout/page": "action-browser"
-      }
+      "filename": "app/actions/checkout.ts",
+      "exportedName": "placeOrder"
+    },
+    "0006ef5711f1496998b29385d5845a2374396970e1": {
+      "workers": {
+        "app/admin-panel-zm982x/page": {
+          "moduleId": 2235,
+          "async": false
+        }
+      },
+      "filename": "app/actions/admin.ts",
+      "exportedName": "getAdminDashboardData"
+    },
+    "400cb84fe8269b66b4dcc4cea34257379e072a3a1c": {
+      "workers": {
+        "app/admin-panel-zm982x/page": {
+          "moduleId": 2235,
+          "async": false
+        }
+      },
+      "filename": "app/actions/admin.ts",
+      "exportedName": "createProduct"
+    },
+    "401f13d51240434ada76e62b8d083eda402d1f0e63": {
+      "workers": {
+        "app/admin-panel-zm982x/page": {
+          "moduleId": 2235,
+          "async": false
+        }
+      },
+      "filename": "app/actions/admin.ts",
+      "exportedName": "deleteProduct"
+    },
+    "4086262d0cdda45970013e0e05bbb004b4f24ff784": {
+      "workers": {
+        "app/admin-panel-zm982x/page": {
+          "moduleId": 2235,
+          "async": false
+        }
+      },
+      "filename": "app/actions/admin.ts",
+      "exportedName": "deleteOrder"
+    },
+    "602cec2db07ee4b67c7fc4315b76c3bf394680e012": {
+      "workers": {
+        "app/admin-panel-zm982x/page": {
+          "moduleId": 2235,
+          "async": false
+        }
+      },
+      "filename": "app/actions/admin.ts",
+      "exportedName": "updateProduct"
+    },
+    "604983645cef56c7aef564bf63939a3be9cb64b6a6": {
+      "workers": {
+        "app/admin-panel-zm982x/page": {
+          "moduleId": 2235,
+          "async": false
+        }
+      },
+      "filename": "app/actions/admin.ts",
+      "exportedName": "updateOrderStatus"
+    },
+    "60c2e528e924e3c61b3f3b5bc8d508f05bcc2704a0": {
+      "workers": {
+        "app/admin-panel-zm982x/page": {
+          "moduleId": 2235,
+          "async": false
+        }
+      },
+      "filename": "app/actions/admin.ts",
+      "exportedName": "toggleProductStatus"
+    },
+    "60c5a3d3968013fdec6628880dee4db6a0fea0f4c4": {
+      "workers": {
+        "app/admin-panel-zm982x/page": {
+          "moduleId": 2235,
+          "async": false
+        }
+      },
+      "filename": "app/actions/admin.ts",
+      "exportedName": "createCategory"
     }
   },
   "edge": {},

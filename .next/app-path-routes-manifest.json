@@ -1,0 +1,20 @@
+{
+  "/_global-error/page": "/_global-error",
+  "/_not-found/page": "/_not-found",
+  "/admin-panel-zm982x/page": "/admin-panel-zm982x",
+  "/admin/page": "/admin",
+  "/api/admin/upload/route": "/api/admin/upload",
+  "/api/checkout/route": "/api/checkout",
+  "/api/search/route": "/api/search",
+  "/checkout/page": "/checkout",
+  "/collections/[slug]/page": "/collections/[slug]",
+  "/collections/all/page": "/collections/all",
+  "/contact/page": "/contact",
+  "/order-success/[orderNumber]/page": "/order-success/[orderNumber]",
+  "/page": "/",
+  "/policies/[slug]/page": "/policies/[slug]",
+  "/products/[slug]/page": "/products/[slug]",
+  "/products/page": "/products",
+  "/search/page": "/search",
+  "/wishlist/page": "/wishlist"
+}

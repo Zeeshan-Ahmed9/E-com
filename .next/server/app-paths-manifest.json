@@ -1,7 +1,20 @@
 {
-  "/page": "app/page.js",
-  "/products/page": "app/products/page.js",
-  "/products/[slug]/page": "app/products/[slug]/page.js",
+  "/_global-error/page": "app/_global-error/page.js",
+  "/_not-found/page": "app/_not-found/page.js",
+  "/admin-panel-zm982x/page": "app/admin-panel-zm982x/page.js",
+  "/admin/page": "app/admin/page.js",
+  "/api/admin/upload/route": "app/api/admin/upload/route.js",
+  "/api/checkout/route": "app/api/checkout/route.js",
+  "/api/search/route": "app/api/search/route.js",
+  "/checkout/page": "app/checkout/page.js",
+  "/collections/[slug]/page": "app/collections/[slug]/page.js",
+  "/collections/all/page": "app/collections/all/page.js",
   "/contact/page": "app/contact/page.js",
-  "/admin-panel-zm982x/page": "app/admin-panel-zm982x/page.js"
+  "/order-success/[orderNumber]/page": "app/order-success/[orderNumber]/page.js",
+  "/page": "app/page.js",
+  "/policies/[slug]/page": "app/policies/[slug]/page.js",
+  "/products/[slug]/page": "app/products/[slug]/page.js",
+  "/products/page": "app/products/page.js",
+  "/search/page": "app/search/page.js",
+  "/wishlist/page": "app/wishlist/page.js"
 }

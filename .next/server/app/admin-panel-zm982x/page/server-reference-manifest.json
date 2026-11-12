@@ -1,0 +1,85 @@
+{
+  "node": {
+    "0006ef5711f1496998b29385d5845a2374396970e1": {
+      "workers": {
+        "app/admin-panel-zm982x/page": {
+          "moduleId": 2235,
+          "async": false
+        }
+      },
+      "exportedName": "getAdminDashboardData",
+      "filename": "app/actions/admin.ts"
+    },
+    "400cb84fe8269b66b4dcc4cea34257379e072a3a1c": {
+      "workers": {
+        "app/admin-panel-zm982x/page": {
+          "moduleId": 2235,
+          "async": false
+        }
+      },
+      "exportedName": "createProduct",
+      "filename": "app/actions/admin.ts"
+    },
+    "401f13d51240434ada76e62b8d083eda402d1f0e63": {
+      "workers": {
+        "app/admin-panel-zm982x/page": {
+          "moduleId": 2235,
+          "async": false
+        }
+      },
+      "exportedName": "deleteProduct",
+      "filename": "app/actions/admin.ts"
+    },
+    "4086262d0cdda45970013e0e05bbb004b4f24ff784": {
+      "workers": {
+        "app/admin-panel-zm982x/page": {
+          "moduleId": 2235,
+          "async": false
+        }
+      },
+      "exportedName": "deleteOrder",
+      "filename": "app/actions/admin.ts"
+    },
+    "602cec2db07ee4b67c7fc4315b76c3bf394680e012": {
+      "workers": {
+        "app/admin-panel-zm982x/page": {
+          "moduleId": 2235,
+          "async": false
+        }
+      },
+      "exportedName": "updateProduct",
+      "filename": "app/actions/admin.ts"
+    },
+    "604983645cef56c7aef564bf63939a3be9cb64b6a6": {
+      "workers": {
+        "app/admin-panel-zm982x/page": {
+          "moduleId": 2235,
+          "async": false
+        }
+      },
+      "exportedName": "updateOrderStatus",
+      "filename": "app/actions/admin.ts"
+    },
+    "60c2e528e924e3c61b3f3b5bc8d508f05bcc2704a0": {
+      "workers": {
+        "app/admin-panel-zm982x/page": {
+          "moduleId": 2235,
+          "async": false
+        }
+      },
+      "exportedName": "toggleProductStatus",
+      "filename": "app/actions/admin.ts"
+    },
+    "60c5a3d3968013fdec6628880dee4db6a0fea0f4c4": {
+      "workers": {
+        "app/admin-panel-zm982x/page": {
+          "moduleId": 2235,
+          "async": false
+        }
+      },
+      "exportedName": "createCategory",
+      "filename": "app/actions/admin.ts"
+    }
+  },
+  "edge": {}
+}
